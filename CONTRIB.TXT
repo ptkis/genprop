@@ -1,0 +1,11 @@
+Contributions
+=============
+- Mike Abney, Spencer Goh and Tom Gaigner for contributing templates that have been inspirations for improving the default tempaltes
+- Martin Schmid for java code for field chooser dialog used in earlier versions
+- Roman Porotnikov for improving templates
+- Glen Schrader for showing how to add this plugin in the generate menu (alt + ins)
+- Igor Levit for implementing the conflict resolution policy code and improving the settings UI
+- Vince Mallet for upgrading the plugin to various Aurora versions
+- Dave Griffith for inspiration how to use Inspection by sneaking his great InspectionGadget plugin source code
+- Rick Maddy for explaining how the migration to the new plugin repository works (the since-build stuff)
+- Mark Scott for the hint how to let Veloicty log using IDEAs log files.

@@ -1,0 +1,6 @@
+/**
+ * Insert your javadoc comments here
+ *
+ * @return   a string representation of the object.
+ */
+return "$classname{}";

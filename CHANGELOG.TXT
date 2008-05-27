@@ -1,0 +1,189 @@
+v2.20 for IDEA 4.5/5.0x
+=======================
+- Compiled with IDEA EAP build 3144 (Irida)
+- [BUG] Saving templates now appends .vm for files with empty extension
+- [NEW] hyperlink to homepage in settings
+- [NEW] quick fix to run Generate toString() for both code inspections
+
+v2.19 for IDEA 3.0x/4.0x/4.5 (jul-20-2004)
+==========================================
+- Compiled with IDEA EAP build 2210 (Pallada)
+- Velocity logging is now logging to IDEA log files (to avoid logging in read-only folders on Unix)
+- since-build changed to 1162 to let the same plugin be available for both IDEA 4.0x, IDEA4.5x.
+
+v2.18 for IDEA 3.0x/4.0x/4.5 (jul-9-2004)
+=========================================
+- Compiled with IDEA EAP build 2178 (Pallada)
+- Fixed bug to detect IDEA version for build 2178, now assuming IDEA 4.x/4.5x series as default to avoid problems if JetBrains changes name pattern in the future.
+- Fixed bug to autosave templates in plugin folder for build 2178 - now moved to USER_HOME\.IntelliJIdea\config\plugins\tostring-plugin
+
+v2.17 for IDEA 3.0x/4.0x/4.5 (jul-6-2004)
+=========================================
+- Compiled with IDEA EAP build 2156 (Pallada)
+- plugin.xml for IDEA 4.0x and IDEA 4.5x using since-build attribute
+
+v2.16 for IDEA 3.x/4.x (mar-23-2004)
+====================================
+- Compiled with IDEA EAP build 2026 (Pallada)
+- Code inspection descriptions added 
+- Some debug System.out removed
+- Fixed a NPE bug where IDEA returns bad information about methods in static inner classes:
+  http://www.intellij.net/forums/thread.jsp?forum=18&thread=88676&tstart=0&trange=15
+
+v2.15 for IDEA 3.x/4.x (mar-10-2004)
+====================================
+- New feature: getters for code generation
+  http://www.intellij.net/forums/thread.jsp?nav=false&forum=18&thread=84580&start=0&msRange=15
+- Apply button in Settings now work correctly
+- Lowered height of textarea for velocity template from 400 to 300
+- Some debug System.out removed
+- Refactored PsiAdapter to support both PsiField and PsiMethod
+- Refactored element package to have Element, FieldElement and MethodElement
+
+v2.14 for IDEA 3.x/4.x (apr-26-2004)
+====================================
+- Compiled with IDEA EAP build 2013 (Pallada)
+- FieldNotUsedInToString inspection is now aware of reflection based toString implementations and therefore does not generate a warning for fields not used
+- Fixed NPE in FieldNotUsedInToString for IDEA (build 2004) wrongly reports a public void method as a field type.
+- Logging added to inspection
+- Exclude static fields now default set to true
+- If cancel resolution policy used then auto import packages etc. are not executed (leaving all code as it is before)
+- Feature to add javadoc to toString() method. Insert javadoc block comment in top of veloctiy macro (see javadoc template example)
+  http://www.intellij.net/forums/thread.jsp?forum=18&thread=84711&tstart=0&trange=15
+- Javadoc is not replaced if the already exists a javadoc for the toString() method
+- Template selection dropdown now displays up to 20 templates without using scrollbar
+- Settings to enable/disalbe on-the-fly code inspection (on-the-fly is disabled by default)
+- Fixed NPE when enabling/disabling action in code/editor menus before having used the action
+
+v2.13 for IDEA 3.x/4.x (apr-19-2004)
+====================================
+- Compiled with IDEA EAP build 2008 (Pallada)
+- Field chooser dialog is not shown if all fields are filtered out by exclude fields
+- Using log4j as debugger. Can be enabled by adding this to log4j.xml in IDEA_HOME\bin folder:
+    <category name="org.intellij.idea.plugin.genprop">
+       <priority value="DEBUG"/>
+       <appender-ref ref="CONSOLE-ALL"/>
+    </category>
+- Action added back to menus if unchecking disable action in code and editor popup menus
+- Fixed bug graying active template for fresh installation of plugin:
+  http://www.intellij.net/forums/thread.jsp?nav=false&forum=18&thread=83053&start=0&msRange=15
+- toString() is added before the public static void main(String[] args) method if its the last method in the class
+- Simple version of inspection feature added:
+  Settings -> Errors -> ToString() Issues -> 'As warnings' to see in right gutter in editor.
+  Setting 'As warnings' for the 'Class does not overwrite toString() method' inspection is not adviceable as the entire
+  class will be marked with yellow (limit in IDEA OpenAPI with only four choices of problem highlights)
+  To run insepctions right click in code editor and choose Inspect Code...
+
+v2.12 for IDEA 3.x/4.x (apr-1-2004)
+===================================
+- Now compatible with IDEA EAP build 2002 (Pallada)
+- New feature to disable action from code and editor popup menus in settings. To enable again requires restart of IDEA (currently)
+- New feature to filter by static modifier in settings
+- Fixed bug in evaluating a field being a constant
+
+v2.11 for IDEA 3.x/4.x (mar-24-2004)
+====================================
+- Compiled using IDEA 4.x (build 1179)
+- boolean $field.modifierVolatile, boolean $field.stringArray, boolean $field.calendar added to Velocity Context
+- String $field.typeName, String $field.typeQualifiedName added to Velocity Context
+- Default concat templates does NOT output length/size of arrays/collections/sets
+- Line and column number in template editor starts from one as Velocity Syntax checker expects
+- New template: AdvancedTemplate (for illustration of more advanced features of velocity macro)
+- $set autoImportPackages(packagenames) in Veolicty Template will automatic import these packages (see AdvancadTemplate.vm)
+- Packagename seperation must now only be comma (to be consistent)
+- Import of packagename now handles all kind of formats (java.text, java.text.*, java.text.SimpleDateFormat)
+- Fixed NPE when config.getMethodBody() is null and invoking the action
+- Always displayed an error dialog if any exception was thrown from the action
+- Exception hieracy implemented
+- Severe exceptions is raised to IDEA for alerting user
+
+v2.10 for IDEA 3.x/4.x (mar-10-2004)
+====================================
+- Renamed plugin back to GenerateToString (without 2) to use the original plugin from the IDEA PluginManager
+- New feature in Settings: Save template
+- New feature in Settings: Automatic add implements java.io.Serializable if absent
+- New feature in Settings: Automatic import these packages (is user defined)
+- New feature in Settings: Syntax check of the active template using Velocity
+- Column and line number displayed for current caret position in text area
+- Two new default templates added: Default Reflection, Default Reflection incl. super.toString()
+- Field chooser dialog is not shown if using Reflection (scans for the string '.getDeclaredFields();')
+- Automatic imports java.lang.reflect.Field if used in generated javacode (e.g. the reflection templates)
+- Automatic creates the tostring-plugin folder for storing custom templates
+- Autosaves the active template in the tostring-plugin folder with the name __autosave_active_[PLUGIN-VERSION].vm (backup file if upgrading plugin and your template are lost)
+- Fixed bug with boolean[] fields not working for IDEA 4.x
+- $field.set, $field.list added to Velocity Context
+- Refined javadoc documentation (package.html)
+
+v2.00 for IDEA 3.x/4.x
+======================
+- Jumped to version 2.x to be able to add this plugin to the IDEA pluginmanager again (having trouble with JetBrains deleted the code helper category from their list).
+- Merged codebase for IDEA v3.x and 4.x. - Resulting into one codebase supporting both IDEA versions.
+- This plugin is NOT backward compatible with all versions (all prior versions for IDEA 3.x, and v1.61 or lower for IDEA 4.x). So backup your template if you use a customized to keep it.
+- Configuration UI tweaked so the regexp input field has a minimum size. Wording changed for a few lables/titles.
+- Improved documentation in package.html 
+- Method PsiAdapter.doClassImplement removed
+- .jar filename renamed to: tostring-plugin-idea3.jar, tostring-plugin-idea4.jar
+
+v1.62b for IDEA 4.x only
+========================
+- Fixed bug with upgrade of plugin causing NullPointerException when generating code.
+- More debug info added.
+
+v1.62 for IDEA 4.x only
+=======================
+- $class.implemented(names) renamed to $class.implements(names)
+- $class.extends(names) added
+- $class.matchName(regexp) added
+- Does not use @deprecated API from IDEA in PsiUtil.isTypeOf()
+- Refactored packagenames. (could break compability with old configurations, so backup your velocity method body)
+- Code generation error messages are displayed in IDEA dialog for user quickly to identify velocity macro errors
+- Apply button in settings is now always active
+- Template repository added. A combobox with possible templates (includes four default templates). Scans for additional templates in IDEA_HOME/plugins/tostring-plugin folder.
+- Active template button with confirm dialog
+- Different wording in choose fields dialog
+- Removed UML diagram from javadoc
+
+v1.61 for IDEA 4.x only
+=======================
+- Better description in plugin.xml and added to the offical IDEA plugin manager
+- Fixed minor typo's in documentation
+- Fixed bug in loading default Velocity Macro's (only happends during a fresh install of the plugin)
+- Renamed package to org.intellij.idea.plugin.genprop
+- Added FileUtil for file IO operations
+- Defaults changed: not using qualified classname and filtering of constants fields enabled
+
+v1.60 for IDEA 4.x only
+=======================
+- Refactored code into several packages and other minor adjustments (renaming of classes etc.)
+- Added ClassElement object
+- ClassElement is added to the VelocityContext named 'class'
+- The following VelocityContext information added:
+    $class                              the ClassElement object.
+    $class.name                         the name of the class.
+    $class.qualifiedName                the fully qualified name of the class.
+    $class.hasSuper                     does the class have a superclass? (extends another class - note extending java.lang.Object is not concidered having a superclass).
+    $class.superName                    the name of the superclass (empty if no superclass).
+    $class.superQualifiedNname          the fully qualified name of the superclass (empty if no superclass).
+    $class.implements(interfaceNames)   tests if the class implements the given interface name. Returns a boolean. Testing several interfaces names can be done by seperating the names with comma.
+    $class.implementNames               returns the classnames of the interfaces the class implements. Returns a string array. An empty array is returned if the class does not implement any interfaces.
+- Default templates are stored in external .vm files in the dk.maerskdata.idea.plugin.generate.templage package.
+- Started working on template repository (disabled for v1.60)
+
+Older changelogs
+================
+v1.52 - Fixed the field chooser dialog assertion failure. -- VinceMallet - 24 Oct 2003
+v1.51 - Migrated to Aurora build 957. Known problem: field chooser dialog fails assertion. -- VinceMallet - 24 Oct 2003
+v1.50 - Aurora build 833 version. I only did simple tests for this version, so some problems could exist if you use a template thats different than the default. But I wanted to release a version that works in Aurora.
+v1.21 - Implemented bugfix in UI settigs submitted by Igor Levit - thanks Igor.
+v1.2 - Removed default keyboard shortcut, since it can be invoked from the generate menu alt + ins. Added method matchName(regExp) on FieldElement to be able to perform regular expression matching on fieldname in the velocity template. Scrollbar added to velocity template text area if needed. Added filtering of unwanted fields in settings (constant, transient and by fieldname). An error dialog is presented if an exception is thrown while performing the action. Added icon for configuration.
+v1.1 - Renamed field $field.transient to $field.modifierTransiet. Added many new varaibles to velocity context. Integrated code contributions from Igor Levit - Refactored code to use ConflictResultionPolicy pattern insteed of enumeration for options, A better UI for the settings, and the "Always overwrite" option is now a more generic "Always apply default resolution policy" and finally the action is disabled in menu's for non javafiles... All this thanks to Igor Levit.
+v1.0 - Added action to generate... menu (alt + insert). Thanks to Glen Schrader for the info.
+v0.9 - Added new varaibles to velocity context ($field.string, $field.objectArray, $field.primitiveArray). Fixed bug in generated code for primitive array types. Single quotes around dumped values for String fields. Automatic import of java.util.Arrays if Arrays is used in the javacode.
+v0.8 - Reusing IDEA's dialog for choosing fields. Added new variables to velocity context ($field.primitive, $field.constant, $field.transient, $FQClassname). Changed "method exists dialog", and added a new default settings for it. Action added to Code menu, and removed from the Other mainmenu.
+v0.7 - Using Roman Porotnikov's velocity variation as default. Added field option map. Now handles evaluation of types for Collection and Map using isAssignableFrom method calls so all kind of objects are regonized as a Collection/Map properly. New dialog to select fields, enable/disable it in the settings. Thanks to Martin Schmid (author of the greate SimpleUML plugin) for the dialog code.
+v0.6 - All code is now generated using a velocity template. See the template in Options -> IDE Settings. Now handles arrays and collections to dump their contents.
+v0.5 - Fixed problem using same Velocity engine as IDEA. Cosmetic fix for body code when no fields and for first field. Updated javadoc.
+v0.4 - Added Velocity template for method body code generation. Added build.xml in source distribution.
+v0.3 - Can generate methods for inner classes. Added UML diagram to javadoc. Doesn't generate field dump for constant fields.
+v0.2 - Removed super call option.
+v0.1 - Initial version.
