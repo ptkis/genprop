@@ -1,5 +1,6 @@
 package org.intellij.idea.plugin.genprop;
 
+import com.intellij.jam.view.ui.SelectElementsDialog;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
@@ -8,16 +9,15 @@ import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMember;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.jam.view.ui.SelectElementsDialog;
 import org.apache.log4j.Logger;
 import org.intellij.idea.plugin.genprop.config.Config;
 import org.intellij.idea.plugin.genprop.config.ConflictResolutionPolicy;
@@ -68,7 +68,7 @@ public class GeneratePropertyNameActionHandler
 	/**
 	 * The action that does the actual generation of the code.
 	 *
-	 * @param editor      the current editor.
+	 * @param editor the current editor.
 	 * @param dataContext the current data context.
 	 */
 	public void executeWriteAction(Editor editor, DataContext dataContext) {
@@ -102,6 +102,7 @@ public class GeneratePropertyNameActionHandler
 	 * The action that does the actual generation of the code.
 	 *
 	 * @param project the current project.
+	 *
 	 * @since 2.20
 	 */
 	public void executeAction(Project project, final PsiClass clazz) {
@@ -159,7 +160,8 @@ public class GeneratePropertyNameActionHandler
 				PsiMember[] dialogMembers = combineToMemberList(filteredFields, filteredMethods);
 				List<PsiElement> psiElements = new ArrayList<PsiElement>();
 				psiElements.addAll(Arrays.asList(dialogMembers));
-				final SelectElementsDialog dialog = new SelectElementsDialog(project,
+				final SelectElementsDialog dialog = new SelectElementsDialog(
+						project,
 						psiElements, "Choose members to be included in generated properties", "Fields");
 				dialog.setSize(200, 200);
 				dialog.getSelectedItems().addAll(psiElements);
@@ -195,8 +197,9 @@ public class GeneratePropertyNameActionHandler
 	/**
 	 * Combines the two lists into one list of members.
 	 *
-	 * @param filteredFields  fields to be included in the dialog
+	 * @param filteredFields fields to be included in the dialog
 	 * @param filteredMethods methods to be included in the dialog
+	 *
 	 * @return the combined list
 	 */
 	private PsiMember[] combineToMemberList(PsiField[] filteredFields, PsiMethod[] filteredMethods) {
@@ -216,9 +219,10 @@ public class GeneratePropertyNameActionHandler
 	/**
 	 * Should the memeber chooser dialog be shown to the user?
 	 *
-	 * @param clazz           the PsiClass
-	 * @param numberOfFields  number of fields to be avail for selection
+	 * @param clazz the PsiClass
+	 * @param numberOfFields number of fields to be avail for selection
 	 * @param numberOfMethods number of methods to be avail for selection
+	 *
 	 * @return true if the dialog should be shown, false if not.
 	 */
 	private boolean displayMememberChooser(PsiClass clazz, int numberOfFields, int numberOfMethods) {
@@ -249,10 +253,11 @@ public class GeneratePropertyNameActionHandler
 	/**
 	 * Generates the toString() code for the specified class and selected fields and methods.
 	 *
-	 * @param clazz           the class
-	 * @param selectedMembers the selected members as both {@link com.intellij.psi.PsiField} and {@link com.intellij.psi.PsiMethod}.
+	 * @param clazz the class
+	 * @param selectedMembers the selected members as both {@link com.intellij.psi.PsiField} and {@link
+	 * com.intellij.psi.PsiMethod}.
 	 */
-	private void executeGenerateAction(PsiClass clazz, Collection <PsiElement>selectedMembers)
+	private void executeGenerateAction(PsiClass clazz, Collection<PsiElement> selectedMembers)
 			throws IncorrectOperationException, GenerateCodeException {
 
 		// decide what to do if the method already exists
@@ -274,8 +279,8 @@ public class GeneratePropertyNameActionHandler
 	}
 
 	/**
-	 * Generates the toString() code for the specified class and selected
-	 * fields, doing the work through a WriteAction ran by a CommandProcessor
+	 * Generates the toString() code for the specified class and selected fields, doing the work through a WriteAction ran
+	 * by a CommandProcessor
 	 */
 	private void executeGenerateActionLater(final PsiClass clazz, final Collection<PsiElement> selectedMemebers) {
 		Runnable writeCommand = new Runnable() {
@@ -300,6 +305,7 @@ public class GeneratePropertyNameActionHandler
 	 * Handles any exception during the executing on this plugin.
 	 *
 	 * @param e the caused exception.
+	 *
 	 * @throws RuntimeException is thrown for severe exceptions
 	 */
 	private void handleExeption(Exception e)
@@ -312,7 +318,7 @@ public class GeneratePropertyNameActionHandler
 			Messages.showMessageDialog(
 					project,
 					"Velocity error generating code - see IDEA log for more details (stacktrace should be in idea.log):\n" +
-					e.getMessage(),
+							e.getMessage(),
 					"Warning",
 					Messages.getWarningIcon());
 		} else if (e instanceof PluginException) {
@@ -320,7 +326,7 @@ public class GeneratePropertyNameActionHandler
 			Messages.showMessageDialog(
 					project,
 					"A PluginException was thrown while performing the action - see IDEA log for details (stacktrace should be in idea.log):\n" +
-					e.getMessage(),
+							e.getMessage(),
 					"Warning",
 					Messages.getWarningIcon());
 		} else if (e instanceof RuntimeException) {
@@ -328,7 +334,7 @@ public class GeneratePropertyNameActionHandler
 			Messages.showMessageDialog(
 					project,
 					"An unrecoverable exception was thrown while performing the action - see IDEA log for details (stacktrace should be in idea.log):\n" +
-					e.getMessage(),
+							e.getMessage(),
 					"Error",
 					Messages.getErrorIcon());
 			throw (RuntimeException) e; // throw to make IDEA alert user
@@ -337,7 +343,7 @@ public class GeneratePropertyNameActionHandler
 			Messages.showMessageDialog(
 					project,
 					"An unrecoverable exception was thrown while performing the action - see IDEA log for details (stacktrace should be in idea.log):\n" +
-					e.getMessage(),
+							e.getMessage(),
 					"Error",
 					Messages.getErrorIcon());
 			throw new RuntimeException(e); // rethrow as runtime to make IDEA alert user
@@ -345,14 +351,14 @@ public class GeneratePropertyNameActionHandler
 	}
 
 	/**
-	 * This method get's the choise if there is an existing <code>toString</code> method.
-	 * <br/> 1) If there is a settings to always override use this.
-	 * <br/> 2) Prompt a dialog and let the user decide.
+	 * This method get's the choise if there is an existing <code>toString</code> method. <br/> 1) If there is a settings
+	 * to always override use this. <br/> 2) Prompt a dialog and let the user decide.
 	 *
 	 * @param clazz the class.
+	 *
 	 * @return the policy the user selected (never null)
 	 */
-	private ConflictResolutionPolicy exitsMethodDialog(PsiClass clazz, Collection <PsiElement>selectedMembers) {
+	private ConflictResolutionPolicy exitsMethodDialog(PsiClass clazz, Collection<PsiElement> selectedMembers) {
 		boolean exists = false;
 		for (PsiElement member : selectedMembers) {
 			if (member instanceof PsiField) {
@@ -381,9 +387,10 @@ public class GeneratePropertyNameActionHandler
 	/**
 	 * This method is executed just before the <code>toString</code> method is created or updated.
 	 *
-	 * @param clazz           the class.
-	 * @param selectedMembers the selected members as both {@link com.intellij.psi.PsiField} and {@link com.intellij.psi.PsiMethod}.
-	 * @param params          additional parameters stored with key/value in the map.
+	 * @param clazz the class.
+	 * @param selectedMembers the selected members as both {@link com.intellij.psi.PsiField} and {@link
+	 * com.intellij.psi.PsiMethod}.
+	 * @param params additional parameters stored with key/value in the map.
 	 */
 	private void beforeCreateToStringMethod(PsiClass clazz, Collection selectedMembers, Map params) {
 		PsiMethod toStringMethod = psi.findMethodByName(clazz, "toString"); // find the existing toString method
@@ -395,17 +402,20 @@ public class GeneratePropertyNameActionHandler
 	/**
 	 * Creates the property constant fields.
 	 *
-	 * @param clazz           the PsiClass object.
-	 * @param selectedMembers the selected members as both {@link com.intellij.psi.PsiField} and {@link com.intellij.psi.PsiMethod}.
-	 * @param policy          conflict resolution policy
-	 * @param params          additional parameters stored with key/value in the map.
+	 * @param clazz the PsiClass object.
+	 * @param selectedMembers the selected members as both {@link com.intellij.psi.PsiField} and {@link
+	 * com.intellij.psi.PsiMethod}.
+	 * @param policy conflict resolution policy
+	 * @param params additional parameters stored with key/value in the map.
+	 *
 	 * @return the created method, null if the method is not created due the user cancels this operation
+	 *
 	 * @throws GenerateCodeException is thrown when there is an error generating the javacode.
 	 */
 	private PsiField[] createPropertyConstantFields(PsiClass clazz,
-													Collection <PsiElement> selectedMembers,
-													ConflictResolutionPolicy policy,
-													Map params)
+			Collection<PsiElement> selectedMembers,
+			ConflictResolutionPolicy policy,
+			Map params)
 			throws IncorrectOperationException, GenerateCodeException {
 		// generate code using velocity
 		List newFields = new LinkedList();
@@ -424,12 +434,12 @@ public class GeneratePropertyNameActionHandler
 			}
 
 
-
 			// applyField conflict resolution policy (add/replace, duplicate, cancel)
 			PsiField existingField = psi.findFieldByName(clazz, fieldName);
 			PsiField newField = elementFactory.createFieldFromText(declaration, null);
-				boolean operationExecuted = policy.applyField(editor,
-						clazz, existingField, newField);
+			boolean operationExecuted = policy.applyField(
+					editor,
+					clazz, existingField, newField);
 			if (existingField != null && !operationExecuted) {
 				//noinspection ReturnOfNull
 				return null; // user cancelled so return null
@@ -437,9 +447,12 @@ public class GeneratePropertyNameActionHandler
 
 			String existingJavaDoc = (String) params.get("existingJavaDoc");
 			String newJavaDoc = "/** Property name constant for {@code " + fieldElement.getName() + "}. */";
-				PsiField propertyNameField = psi.findFieldByName(clazz, fieldName); // must find again to be able to add javadoc (IDEA does not add if using method parameter)
-				policy.applyJavaDoc(clazz, propertyNameField,
-						codeStyleManager, elementFactory, existingJavaDoc, newJavaDoc);
+			PsiField propertyNameField = psi.findFieldByName(
+					clazz,
+					fieldName); // must find again to be able to add javadoc (IDEA does not add if using method parameter)
+			policy.applyJavaDoc(
+					clazz, propertyNameField,
+					codeStyleManager, elementFactory, existingJavaDoc, newJavaDoc);
 
 			// reformat code style
 			codeStyleManager.reformat(newField);
@@ -454,14 +467,14 @@ public class GeneratePropertyNameActionHandler
 	/**
 	 * This method is executed just after the <code>toString</code> method is created or updated.
 	 *
-	 * @param clazz  the PsiClass object.
+	 * @param clazz the PsiClass object.
 	 * @param fields the newly created/updated <code>toString</code> method.
 	 * @param params additional parameters stored with key/value in the map.
 	 */
 	private void afterCreateToStringMethod(PsiClass clazz,
-										   PsiField[] fields,
-										   ConflictResolutionPolicy policy,
-										   Map params)
+			PsiField[] fields,
+			ConflictResolutionPolicy policy,
+			Map params)
 			throws IncorrectOperationException {
 	}
 
@@ -469,10 +482,12 @@ public class GeneratePropertyNameActionHandler
 	 * Get's the list of members to be put in the VelocityContext.
 	 *
 	 * @param members a list of {@link com.intellij.psi.PsiMember} objects.
-	 * @return a filtered list of only the fields as {@link org.intellij.idea.plugin.genprop.element.FieldElement} objects.
+	 *
+	 * @return a filtered list of only the fields as {@link org.intellij.idea.plugin.genprop.element.FieldElement}
+	 *         objects.
 	 */
-	private List<FieldElement> getOnlyAsFieldElements(Collection <PsiElement>members) {
-		List <FieldElement> fieldElementList = new ArrayList<FieldElement>();
+	private List<FieldElement> getOnlyAsFieldElements(Collection<PsiElement> members) {
+		List<FieldElement> fieldElementList = new ArrayList<FieldElement>();
 
 		for (PsiElement member : members) {
 			if (member instanceof PsiField) {
@@ -493,7 +508,9 @@ public class GeneratePropertyNameActionHandler
 	 * Get's the list of members to be put in the VelocityContext.
 	 *
 	 * @param members a list of {@link com.intellij.psi.PsiMember} objects.
-	 * @return a filtered list of only the methods as a {@link org.intellij.idea.plugin.genprop.element.MethodElement} objects.
+	 *
+	 * @return a filtered list of only the methods as a {@link org.intellij.idea.plugin.genprop.element.MethodElement}
+	 *         objects.
 	 */
 	private List getOnlyAsMethodElements(Collection members) {
 		List methodElementList = new ArrayList();
@@ -514,7 +531,9 @@ public class GeneratePropertyNameActionHandler
 	 * Get's the list of members to be put in the VelocityContext.
 	 *
 	 * @param members a list of {@link com.intellij.psi.PsiMember} objects.
-	 * @return a filtered list of only the methods as a {@link org.intellij.idea.plugin.genprop.element.FieldElement} or {@link org.intellij.idea.plugin.genprop.element.MethodElement} objects.
+	 *
+	 * @return a filtered list of only the methods as a {@link org.intellij.idea.plugin.genprop.element.FieldElement} or
+	 *         {@link org.intellij.idea.plugin.genprop.element.MethodElement} objects.
 	 */
 	private List getOnlyAsFieldAndMethodElements(Collection members) {
 		List elementList = new ArrayList();
@@ -536,10 +555,12 @@ public class GeneratePropertyNameActionHandler
 	}
 
 	/**
-	 * Filters the list of fields from the class with the given parameters from the {@link org.intellij.idea.plugin.genprop.config.Config config} settings.
+	 * Filters the list of fields from the class with the given parameters from the {@link
+	 * org.intellij.idea.plugin.genprop.config.Config config} settings.
 	 *
-	 * @param clazz   The class to filter it's fields
+	 * @param clazz The class to filter it's fields
 	 * @param pattern the filter pattern to filter out unwanted fields
+	 *
 	 * @return fields avaiable for this action after the filter process.
 	 */
 	private PsiField[] filterAvailableFields(PsiClass clazz, FilterPattern pattern) {
@@ -568,15 +589,12 @@ public class GeneratePropertyNameActionHandler
 
 
 	/**
-	 * Filters the list of methods from the class to be
-	 * <ul>
-	 * <li/>a getter method (java bean compliant)
-	 * <li/>should not be a getter for an existing field
-	 * <li/>public, non static, non abstract
-	 * <ul/>
+	 * Filters the list of methods from the class to be <ul> <li/>a getter method (java bean compliant) <li/>should not be
+	 * a getter for an existing field <li/>public, non static, non abstract <ul/>
 	 *
-	 * @param clazz   the class to filter it's fields
+	 * @param clazz the class to filter it's fields
 	 * @param pattern the filter pattern to filter out unwanted fields
+	 *
 	 * @return methods avaiable for this action after the filter process.
 	 */
 	private PsiMethod[] filterAvailableMethods(PsiClass clazz, FilterPattern pattern) {

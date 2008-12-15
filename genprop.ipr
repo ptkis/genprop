@@ -7,6 +7,7 @@
       <antReference projectDefault="true" />
       <customJdkName value="" />
       <maximumHeapSize value="128" />
+      <maximumStackSize value="32" />
       <properties />
     </buildFile>
   </component>
@@ -66,6 +67,7 @@
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="EmbeddedBrowser.BrowserComponent" xPos="-1" yPos="-1" width="600" height="200" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
@@ -180,7 +182,6 @@
           <option name="m_ignoreCloneableDueToInheritance" value="true" />
         </inspection_tool>
         <inspection_tool class="CStyleArrayDeclaration" level="WARNING" enabled="true" />
-        <inspection_tool class="ConstantOnLHSOfComparisonJS" level="WARNING" enabled="true" />
         <inspection_tool class="LiteralAsArgToStringEquals" level="WARNING" enabled="true" />
         <inspection_tool class="MissortedModifiers" level="WARNING" enabled="true">
           <option name="m_requireAnnotationsFirst" value="true" />
@@ -199,16 +200,16 @@
           <option name="ignoreEnums" value="false" />
         </inspection_tool>
         <inspection_tool class="CatchGenericClass" level="WARNING" enabled="true" />
-        <inspection_tool class="EmptyTryBlockJS" level="WARNING" enabled="true" />
         <inspection_tool class="InstanceofCatchParameter" level="WARNING" enabled="true" />
-        <inspection_tool class="TooBroadCatch" level="WARNING" enabled="true" />
+        <inspection_tool class="TooBroadCatch" level="WARNING" enabled="true">
+          <option name="onlyWarnOnRootExceptions" value="false" />
+        </inspection_tool>
         <inspection_tool class="ExceptionFromCatchWhichDoesntWrap" level="WARNING" enabled="true">
           <option name="ignoreGetMessage" value="true" />
         </inspection_tool>
         <inspection_tool class="UnusedCatchParameter" level="WARNING" enabled="true">
           <option name="m_ignoreCatchBlocksWithComments" value="false" />
           <option name="m_ignoreTestCases" value="true" />
-          <option name="m_ignoreIgnoreParameter" value="true" />
         </inspection_tool>
         <inspection_tool class="AbstractMethodCallInConstructor" level="WARNING" enabled="true" />
         <inspection_tool class="InstanceVariableUninitializedUse" level="WARNING" enabled="true">
@@ -299,18 +300,13 @@
         <inspection_tool class="AssignmentToMethodParameter" level="WARNING" enabled="true">
           <option name="ignoreTransformationOfOriginalParameter" value="false" />
         </inspection_tool>
-        <inspection_tool class="BreakStatementWithLabelJS" level="WARNING" enabled="true" />
         <inspection_tool class="ChainedEquality" level="WARNING" enabled="true" />
         <inspection_tool class="ConfusingFloatingPointLiteral" level="WARNING" enabled="true" />
-        <inspection_tool class="ContinueStatementWithLabelJS" level="WARNING" enabled="true" />
         <inspection_tool class="SwitchStatementWithConfusingDeclaration" level="WARNING" enabled="true" />
         <inspection_tool class="LongLiteralsEndingWithLowercaseL" level="WARNING" enabled="true" />
         <inspection_tool class="MethodNamesDifferOnlyByCase" level="WARNING" enabled="true" />
         <inspection_tool class="NestedSwitchStatement" level="WARNING" enabled="true" />
         <inspection_tool class="NestedAssignment" level="WARNING" enabled="true" />
-        <inspection_tool class="OverlyComplexArithmeticExpressionJS" level="WARNING" enabled="true">
-          <option name="m_limit" value="6" />
-        </inspection_tool>
         <inspection_tool class="OverlyComplexBooleanExpression" level="WARNING" enabled="true">
           <option name="m_limit" value="3" />
           <option name="m_ignorePureConjunctionsDisjunctions" value="true" />
@@ -387,9 +383,7 @@
         </inspection_tool>
         <inspection_tool class="ConfusingOctalEscape" level="WARNING" enabled="true" />
         <inspection_tool class="MissingDeprecatedAnnotation" level="WARNING" enabled="true" />
-        <inspection_tool class="MissingOverrideAnnotation" level="WARNING" enabled="true">
-          <option name="useJdk6Rules" value="false" />
-        </inspection_tool>
+        <inspection_tool class="MissingOverrideAnnotation" level="WARNING" enabled="true" />
         <inspection_tool class="CloneInNonCloneableClass" level="WARNING" enabled="true" />
         <inspection_tool class="ListIndexOfReplaceableByContains" level="WARNING" enabled="true" />
         <inspection_tool class="ControlFlowStatementWithoutBraces" level="WARNING" enabled="true" />
@@ -418,7 +412,6 @@
           <option name="m_ignoreNegatedNullComparison" value="true" />
         </inspection_tool>
         <inspection_tool class="ReuseOfLocalVariable" level="WARNING" enabled="true" />
-        <inspection_tool class="ReuseOfLocalVariableJS" level="WARNING" enabled="true" />
         <inspection_tool class="ErrorRethrown" level="WARNING" enabled="true" />
         <inspection_tool class="ThreadDeathRethrown" level="WARNING" enabled="true" />
         <inspection_tool class="NonFinalFieldOfException" level="WARNING" enabled="true" />
@@ -469,7 +462,8 @@
         <inspection_tool class="DivideByZero" level="WARNING" enabled="true" />
         <inspection_tool class="BigDecimalEquals" level="WARNING" enabled="true" />
         <inspection_tool class="ImplicitNumericConversion" level="WARNING" enabled="true">
-          <option name="m_ignoreWideningConversions" value="true" />
+          <option name="ignoreWideningConversions" value="false" />
+          <option name="ignoreCharConversions" value="false" />
         </inspection_tool>
         <inspection_tool class="IntegerMultiplicationImplicitCastToLong" level="WARNING" enabled="true" />
         <inspection_tool class="NonReproducibleMathCall" level="WARNING" enabled="true" />
@@ -483,7 +477,9 @@
         <inspection_tool class="EqualsHashCodeCalledOnUrl" level="WARNING" enabled="true" />
         <inspection_tool class="CollectionContainsUrl" level="WARNING" enabled="true" />
         <inspection_tool class="MapReplaceableByEnumMap" level="WARNING" enabled="true" />
-        <inspection_tool class="StringReplaceableByStringBuffer" level="WARNING" enabled="true" />
+        <inspection_tool class="StringReplaceableByStringBuffer" level="WARNING" enabled="true">
+          <option name="onlyWarnOnLoop" value="true" />
+        </inspection_tool>
         <inspection_tool class="SubstringZero" level="WARNING" enabled="true" />
         <inspection_tool class="SetReplaceableByEnumSet" level="WARNING" enabled="true" />
         <inspection_tool class="SizeReplaceableByIsEmpty" level="WARNING" enabled="true">
@@ -775,13 +771,16 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDetails">
+    <option name="projectName" value="genprop" />
+  </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/genprop.iml" filepath="$PROJECT_DIR$/genprop.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA 7757" project-jdk-type="IDEA JDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA 9164" project-jdk-type="IDEA JDK">
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
   <component name="ProjectRunConfigurationManager">
@@ -823,6 +822,9 @@
   <component name="Scrappy">
     <scrapTab name="Scrap" />
     <imports />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myVersion" value="124" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
