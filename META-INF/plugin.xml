@@ -2,12 +2,13 @@
 <idea-plugin>
 	<name>GeneratePropertyNameConstants</name>
 	<description>Adds a new menu generate property name constants in the generate menu (alt + ins) to generate property name constants.</description>
-	<version>0.02</version>
-	<vendor email="thomas.edwin.santosa@gmail.com">Thomas Edwin Santosa</vendor>
-	<idea-version since-build="7590"/> <!-- 1162 to be avail for both IDEA 4.0x and IDEA4.5x -->
+	<version>0.03</version>
+	<vendor email="thomas@katalisindonesia.com">Thomas Edwin Santosa</vendor>
+	<idea-version since-build="102.000"/>
+	<!-- 1162 to be avail for both IDEA 4.0x and IDEA4.5x -->
 
 	<change-notes>
-	  1) Compiled with IDEA build 7590
+		1) Compiled with IDEA build 107.509
 	</change-notes>
 
 	<application-components>
@@ -20,16 +21,22 @@
 	<actions>
 
 		<!-- add property name constants in code and right-click menus -->
-		<action id="Actions.ActionsPlugin.GeneratePropertyNameConstants" class="org.intellij.idea.plugin.genprop.GeneratePropertyNameAction" text="Generate _property name constants" description="Generate property name constants"/>
-		<group id="Actions.ActionsPlugin.GeneratePropertyNameConstantsGroup" text="Generate _property name constants" description="Generate property name constants">
+		<action id="Actions.ActionsPlugin.GeneratePropertyNameConstants"
+				class="org.intellij.idea.plugin.genprop.GeneratePropertyNameAction"
+				text="Generate _property name constants" description="Generate property name constants"/>
+		<group id="Actions.ActionsPlugin.GeneratePropertyNameConstantsGroup" text="Generate _property name constants"
+			   description="Generate property name constants">
 			<reference id="Actions.ActionsPlugin.GeneratePropertyNameConstants"/>
 			<add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Generate"/>
 			<add-to-group group-id="CodeMenu" anchor="after" relative-to-action="Generate"/>
 		</group>
 
 		<!-- add property name constants in the generate menu (alt + ins) -->
-		<action id="Actions.ActionsPlugin.GeneratePropertyNameConstantsGG" class="org.intellij.idea.plugin.genprop.GeneratePropertyNameAction" text="Property Name Constants" description="Generate property name constants"/>
-		<group id="Actions.ActionsPlugin.GeneratePropertyNameConstantsGenerateGroup" text="Property Name Constants" description="Generate property name constants">
+		<action id="Actions.ActionsPlugin.GeneratePropertyNameConstantsGG"
+				class="org.intellij.idea.plugin.genprop.GeneratePropertyNameAction" text="Property Name Constants"
+				description="Generate property name constants"/>
+		<group id="Actions.ActionsPlugin.GeneratePropertyNameConstantsGenerateGroup" text="Property Name Constants"
+			   description="Generate property name constants">
 			<reference id="Actions.ActionsPlugin.GeneratePropertyNameConstantsGG"/>
 			<add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GenerateEquals"/>
 		</group>
