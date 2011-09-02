@@ -4,7 +4,7 @@ import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
-import org.intellij.idea.plugin.genprop.GeneratePropertyNameActionHandler;
+import org.intellij.idea.plugin.genprop.GeneratePropertyActionHandler;
 import org.intellij.idea.plugin.genprop.GeneratePropertyNameContext;
 import org.intellij.idea.plugin.genprop.psi.PsiAdapter;
 
@@ -14,24 +14,25 @@ import org.intellij.idea.plugin.genprop.psi.PsiAdapter;
  * @author Claus Ibsen
  * @since 2.20
  */
-public class PropertyHasNoNameConstantQuickFix implements LocalQuickFix {
+public class PropertyHasNoNameConstantQuickFix
+		implements LocalQuickFix {
 
-    private PsiAdapter psi;
+	private PsiAdapter psi;
 
-    public PropertyHasNoNameConstantQuickFix() {
-        psi = GeneratePropertyNameContext.getPsi();
-    }
+	public PropertyHasNoNameConstantQuickFix() {
+		psi = GeneratePropertyNameContext.getPsi();
+	}
 
-    public String getName() {
-        return "Generate property name constants";
-    }
+	public String getName() {
+		return "Generate property name constants";
+	}
 
-    public void applyFix(Project project, ProblemDescriptor desc) {
-        PsiClass clazz = psi.findClass(desc.getPsiElement());
+	public void applyFix(Project project, ProblemDescriptor desc) {
+		PsiClass clazz = psi.findClass(desc.getPsiElement());
 
-        GeneratePropertyNameActionHandler handler = new GeneratePropertyNameActionHandler();
-        handler.executeAction(project, clazz);
-    }
+		GeneratePropertyActionHandler handler = new GeneratePropertyActionHandler();
+		handler.executeAction(project, clazz);
+	}
 
 	//to appear in "Apply Fix" statement when multiple Quick Fixes exist
 	public String getFamilyName() {

@@ -1,260 +1,175 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="genprop" default="all">
-  
-  
-  <!-- Uncomment the following property if no tests compilation is needed -->
-  <!-- 
-  <property name="skip.tests" value="true"/>
-   -->
-  
-  <!-- Compiler options -->
-  
-  <property name="compiler.debug" value="on"/>
-  <property name="compiler.generate.no.warnings" value="off"/>
-  <property name="compiler.args" value=""/>
-  <property name="compiler.max.memory" value="128m"/>
-  <patternset id="compiler.excluded"/>
-  <patternset id="compiler.resources">
-    <include name="**/?*.properties"/>
-    <include name="**/?*.xml"/>
-    <include name="**/?*.gif"/>
-    <include name="**/?*.png"/>
-    <include name="**/?*.jpeg"/>
-    <include name="**/?*.jpg"/>
-    <include name="**/?*.html"/>
-    <include name="**/?*.dtd"/>
-    <include name="**/?*.tld"/>
-  </patternset>
-  <!-- JDK definitions -->
-  
-  <property name="jdk.home.java_version_1.4.2_06" value="/usr/java/j2sdk1.4.2_06"/>
-  <path id="jdk.classpath.java_version_1.4.2_06">
-    <fileset dir="${jdk.home.java_version_1.4.2_06}">
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/sunrsasign.jar"/>
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/rt.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/ldapsec.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="jdk.home.java_version_1.5.0_03" value="/usr/java/jdk1.5.0_03"/>
-  <path id="jdk.classpath.java_version_1.5.0_03">
-    <fileset dir="${jdk.home.java_version_1.5.0_03}">
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/rt.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/sunpkcs11.jar"/>
-      <include name="jre/lib/ext/mlibwrapper_jai.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/jai_codec.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-      <include name="jre/lib/ext/jai_core.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="jdk.home.java_version_1.4.2_07" value="/usr/java/j2sdk1.4.2_07"/>
-  <path id="jdk.classpath.java_version_1.4.2_07">
-    <fileset dir="${jdk.home.java_version_1.4.2_07}">
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/jsse.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/plugin.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/sunrsasign.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/charsets.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/rt.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/jce.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/dnsns.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/sunjce_provider.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/ldapsec.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/localedata.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="jdk.home.java_version_1.4.2_07_debug" value="/usr/java/jdk1.4.2_07"/>
-  <path id="jdk.classpath.java_version_1.4.2_07_debug">
-    <fileset dir="${jdk.home.java_version_1.4.2_07_debug}">
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/jsse.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/plugin.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/sunrsasign.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/charsets.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/jce.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/dnsns.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/sunjce_provider.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/ldapsec.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/looks-1.3.1.jar"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/ext/localedata.jar"/>
-      <include name="../../../home/thomas/IdeaProjects/jdk1.4-src/classes"/>
-      <include name="../../lib/jdk-1.4.2_07/jre/lib/rt.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="project.jdk.home" value="${jdk.home.java_version_1.4.2_07}"/>
-  <property name="project.jdk.classpath" value="jdk.classpath.java_version_1.4.2_07"/>
-  <!-- Project Libraries -->
-  <!-- Global Libraries -->
-  
-  <path id="library.commons-io-1.0.classpath">
-    <pathelement location="/home/thomas/java/commons-io-1.0/commons-io-1.0.jar"/>
-  </path>
-  
-  <path id="library.glazedlists.classpath">
-    <pathelement location="/home/thomas/java/glazedlist/glazedlists.jar"/>
-  </path>
-  
-  <path id="library.jfcunit.classpath">
-    <pathelement location="/home/thomas/java/jfcunit/jfcunit.jar"/>
-  </path>
-  
-  <path id="library.junit.classpath">
-    <pathelement location="/home/thomas/java/junit3.8.1/junit.jar"/>
-  </path>
-  
-  <path id="library.jmock-1.0.1.classpath">
-    <pathelement location="/home/thomas/java/jmock-1.0/jmock-1.0.1.jar"/>
-  </path>
-  
-  <path id="library.httpunit-1.6.classpath">
-    <pathelement location="/home/thomas/java/httpunit-1.6/lib/httpunit.jar"/>
-    <pathelement location="/home/thomas/java/httpunit-1.6/jars/nekohtml.jar"/>
-    <pathelement location="/home/thomas/java/httpunit-1.6/jars/js.jar"/>
-  </path>
-  
-  <path id="library.abbot-1.0.classpath">
-    <pathelement location="/home/thomas/java/abbot-1.0.0rc1/lib/abbot.jar"/>
-    <pathelement location="/home/thomas/java/abbot-1.0.0rc1/lib/junit.jar"/>
-    <pathelement location="/home/thomas/java/abbot-1.0.0rc1/lib/jgraph.jar"/>
-    <pathelement location="/home/thomas/java/abbot-1.0.0rc1/lib/bsh.jar"/>
-    <pathelement location="/home/thomas/java/abbot-1.0.0rc1/lib/gnu-regexp.jar"/>
-    <pathelement location="/home/thomas/java/abbot-1.0.0rc1/lib/MRJToolkitStubs.zip"/>
-  </path>
-  
-  <path id="library.openapi.classpath">
-    <pathelement location="/home/thomas/java/idea-2253/lib/openapi.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/log4j.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/velocity.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/jdom.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/trove4j.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/idea_rt.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/resources.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/forms_rt.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/jasper2_rt.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/junit.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/xmlrpc-1.1.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/oromatcher.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/jh.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/xerces.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/servlet.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/bcel.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/idea.jar"/>
-    <pathelement location="/home/thomas/java/idea-2253/lib/icons.jar"/>
-  </path>
-  <!-- Application Server Libraries -->
-  
-  <path id="library.resin_3.x.classpath">
-    <pathelement location="/usr/local/resin-3.0.13/lib/jsdk-24.jar"/>
-    <pathelement location="/home/thomas/proyek/sunsdk-patch/target/sunsdk-patch.jar"/>
-  </path>
-  
-  <path id="library.tomcat.classpath">
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/jasper-compiler.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/servlet-api.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/commons-collections-3.1.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/commons-dbcp-1.2.1.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/commons-el.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/naming-factory.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/jasper-runtime.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/jsp-api.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/naming-resources.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/ant.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/naming-java.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/naming-common.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/ant-launcher.jar"/>
-    <pathelement location="/home/thomas/java/jakarta-tomcat-5.0.28/common/lib/commons-pool-1.2.jar"/>
-  </path>
-  
-  
-  <dirname property="module.genprop.basedir" file="${ant.file}"/>
-  
-  
-  <property name="module.jdk.home.genprop" value="${project.jdk.home}"/>
-  <property name="module.jdk.classpath.genprop" value="${project.jdk.classpath}"/>
-  
-  <property name="compiler.args.genprop" value="${compiler.args}"/>
-  
-  <property name="genprop.output.dir" value="${module.genprop.basedir}/classes"/>
-  <property name="genprop.testoutput.dir" value="${module.genprop.basedir}/classes"/>
-  
-  <path id="genprop.module.bootclasspath">
-    <!-- Paths to be included in compilation bootclasspath -->
-  </path>
-  
-  <path id="genprop.module.classpath">
-    <path refid="${module.jdk.classpath.genprop}"/>
-    <path refid="library.openapi.classpath"/>
-  </path>
-  
-  
-  <patternset id="excluded.from.module.genprop"/>
-  
-  <patternset id="excluded.from.compilation.genprop">
-    <patternset refid="excluded.from.module.genprop"/>
-    <patternset refid="compiler.excluded"/>
-  </patternset>
-  
-  <path id="genprop.module.sourcepath">
-    <dirset dir="${module.genprop.basedir}">
-      <include name="resources"/>
-      <include name="src"/>
-    </dirset>
-  </path>
-  
-  
-  <target name="compile.module.genprop" depends="compile.module.genprop.production,compile.module.genprop.tests" description="compile module genprop"/>
-  
-  <target name="compile.module.genprop.production" description="compile module genprop production classes">
-    <mkdir dir="${genprop.output.dir}"/>
-    <javac destdir="${genprop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memoryMaximumSize="${compiler.max.memory}" fork="true" executable="${module.jdk.home.genprop}/bin/javac">
-      <compilerarg line="${compiler.args.genprop}"/>
-      <bootclasspath refid="genprop.module.bootclasspath"/>
-      <classpath refid="genprop.module.classpath"/>
-      <src refid="genprop.module.sourcepath"/>
-      <patternset refid="excluded.from.compilation.genprop"/>
-    </javac>
-    <copy todir="${genprop.output.dir}">
-      <fileset dir="${module.genprop.basedir}/resources">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-        <patternset refid="excluded.from.compilation.genprop"/>
-      </fileset>
-      <fileset dir="${module.genprop.basedir}/src">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-        <patternset refid="excluded.from.compilation.genprop"/>
-      </fileset>
-    </copy>
-  </target>
-  
-  <target name="compile.module.genprop.tests" depends="compile.module.genprop.production" description="compile module genprop test classes" unless="skip.tests"/>
-  
-  <target name="clean.module.genprop" description="cleanup module">
-    <delete dir="${genprop.output.dir}"/>
-    <delete dir="${genprop.testoutput.dir}"/>
-  </target>
-  
-  <target name="init" description="Build initialization">
-    <!-- Perform any build initialization in this target -->
-  </target>
-  
-  <target name="clean" depends="clean.module.genprop" description="cleanup all"/>
-  
-  <target name="all" depends="init, clean, compile.module.genprop" description="build all"/>
+
+
+	<property file="genprop.properties"/>
+	<!-- Uncomment the following property if no tests compilation is needed -->
+	<!-- 
+	  <property name="skip.tests" value="true"/>
+	   -->
+
+	<!-- Compiler options -->
+
+	<property name="compiler.debug" value="on"/>
+	<property name="compiler.generate.no.warnings" value="off"/>
+	<property name="compiler.args" value=""/>
+	<property name="compiler.max.memory" value="128m"/>
+	<patternset id="ignored.files">
+		<exclude name="**/CVS/**"/>
+		<exclude name="**/SCCS/**"/>
+		<exclude name="**/RCS/**"/>
+		<exclude name="**/.DS_Store/**"/>
+		<exclude name="**/.svn/**"/>
+		<exclude name="**/.pyc/**"/>
+		<exclude name="**/.pyo/**"/>
+		<exclude name="**/*.pyc/**"/>
+		<exclude name="**/*.pyo/**"/>
+		<exclude name="**/.git/**"/>
+		<exclude name="**/.sbas/**"/>
+		<exclude name="**/.IJI.*/**"/>
+		<exclude name="**/vssver.scc/**"/>
+		<exclude name="**/vssver2.scc/**"/>
+		<exclude name="**/*.hprof/**"/>
+		<exclude name="**/_svn/**"/>
+		<exclude name="**/.hg/**"/>
+		<exclude name="**/*.lib/**"/>
+		<exclude name="**/*~/**"/>
+		<exclude name="**/*.orig/**"/>
+		<exclude name="**/__pycache__/**"/>
+		<exclude name="**/.bundle/**"/>
+	</patternset>
+	<patternset id="library.patterns">
+		<include name="*.war"/>
+		<include name="*.ear"/>
+		<include name="*.zip"/>
+		<include name="*.swc"/>
+		<include name="*.egg"/>
+		<include name="*.jar"/>
+	</patternset>
+	<patternset id="compiler.resources">
+		<include name="**/?*.properties"/>
+		<include name="**/?*.xml"/>
+		<include name="**/?*.gif"/>
+		<include name="**/?*.png"/>
+		<include name="**/?*.jpeg"/>
+		<include name="**/?*.jpg"/>
+		<include name="**/?*.html"/>
+		<include name="**/?*.dtd"/>
+		<include name="**/?*.tld"/>
+		<include name="**/?*.vm"/>
+	</patternset>
+
+
+	<!-- Global Libraries -->
+
+
+	<!-- Application Server Libraries -->
+
+	<!-- Modules -->
+
+
+	<!-- Module genprop -->
+
+	<dirname property="module.genprop.basedir" file="${ant.file}"/>
+
+
+	<property name="compiler.args.genprop" value="${compiler.args}"/>
+
+	<property name="genprop.output.dir" value="${module.genprop.basedir}/classes/production/genprop"/>
+	<property name="genprop.testoutput.dir" value="${module.genprop.basedir}/classes/test/genprop"/>
+
+	<path id="genprop.module.bootclasspath">
+		<!-- Paths to be included in compilation bootclasspath -->
+	</path>
+
+	<path id="genprop.module.production.classpath"/>
+
+	<path id="genprop.runtime.production.module.classpath">
+		<pathelement location="${genprop.output.dir}"/>
+	</path>
+
+	<path id="genprop.module.classpath">
+		<pathelement location="${genprop.output.dir}"/>
+	</path>
+
+	<path id="genprop.runtime.module.classpath">
+		<pathelement location="${genprop.testoutput.dir}"/>
+		<pathelement location="${genprop.output.dir}"/>
+	</path>
+
+
+	<patternset id="excluded.from.module.genprop">
+		<patternset refid="ignored.files"/>
+	</patternset>
+
+	<patternset id="excluded.from.compilation.genprop">
+		<patternset refid="excluded.from.module.genprop"/>
+	</patternset>
+
+	<path id="genprop.module.sourcepath">
+		<dirset dir="${module.genprop.basedir}">
+			<include name="resources"/>
+			<include name="src"/>
+		</dirset>
+	</path>
+
+
+	<target name="compile.module.genprop" depends="compile.module.genprop.production,compile.module.genprop.tests"
+			description="Compile module genprop"/>
+
+	<target name="compile.module.genprop.production" description="Compile module genprop; production classes">
+		<mkdir dir="${genprop.output.dir}"/>
+		<javac destdir="${genprop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+			   memorymaximumsize="${compiler.max.memory}" fork="true">
+			<compilerarg line="${compiler.args.genprop}"/>
+			<bootclasspath refid="genprop.module.bootclasspath"/>
+			<classpath refid="genprop.module.production.classpath"/>
+			<src refid="genprop.module.sourcepath"/>
+			<patternset refid="excluded.from.compilation.genprop"/>
+		</javac>
+
+		<copy todir="${genprop.output.dir}">
+			<fileset dir="${module.genprop.basedir}/resources">
+				<patternset refid="compiler.resources"/>
+				<type type="file"/>
+			</fileset>
+			<fileset dir="${module.genprop.basedir}/src">
+				<patternset refid="compiler.resources"/>
+				<type type="file"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compile.module.genprop.tests" depends="compile.module.genprop.production"
+			description="compile module genprop; test classes" unless="skip.tests"/>
+
+	<target name="clean.module.genprop" description="cleanup module">
+		<delete dir="${genprop.output.dir}"/>
+		<delete dir="${genprop.testoutput.dir}"/>
+	</target>
+
+	<property name="genprop.plugin.path.jar" value="${module.genprop.basedir}/genprop.jar"/>
+
+	<!-- Build archive for plugin 'genprop' -->
+	<target name="plugin.build.jar.genprop" depends="compile.module.genprop"
+			description="Build plugin archive for module &apos;genprop&apos;">
+		<jar destfile="${genprop.plugin.path.jar}" duplicate="preserve">
+			<zipfileset dir="${module.genprop.basedir}/classes/production/genprop"/>
+			<zipfileset file="${module.genprop.basedir}/META-INF/plugin.xml" prefix="META-INF"/>
+			<manifest>
+				<attribute name="Created-By" value="IntelliJ IDEA"/>
+				<attribute name="Manifest-Version" value="1.0"/>
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="init" description="Build initialization">
+		<!-- Perform any build initialization in this target -->
+	</target>
+
+	<target name="clean" depends="clean.module.genprop" description="cleanup all"/>
+
+	<target name="build.modules" depends="init, clean, plugin.build.jar.genprop" description="build all modules"/>
+
+	<target name="all" depends="build.modules" description="build all"/>
 </project>

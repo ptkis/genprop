@@ -48,10 +48,10 @@ import java.util.Map;
  * @author Claus Ibsen
  * @since 2.13
  */
-public class GeneratePropertyNameActionHandler
+public class GeneratePropertyActionHandler
 		extends EditorWriteActionHandler {
 
-	private static final Logger log = Logger.getLogger(GeneratePropertyNameActionHandler.class);
+	private static final Logger log = Logger.getLogger(GeneratePropertyActionHandler.class);
 	private static final PsiMethod[] EMPTY_PSI_METHODS = new PsiMethod[0];
 	private Editor editor;
 	private Project project;
@@ -62,7 +62,7 @@ public class GeneratePropertyNameActionHandler
 	private Config config;
 	private PsiJavaFile javaFile;
 
-	public GeneratePropertyNameActionHandler() {
+	public GeneratePropertyActionHandler() {
 		psi = GeneratePropertyNameContext.getPsi();
 	}
 
@@ -148,7 +148,7 @@ public class GeneratePropertyNameActionHandler
 			}
 
 			PsiMethod[] filteredMethods = EMPTY_PSI_METHODS;
-			if (config.enableMethods) {
+			if (config.isEnableMethods()) {
 				// filter methods as it is enabled from config
 				filteredMethods = filterAvailableMethods(clazz, config.getFilterPattern());
 				if (log.isDebugEnabled()) {
@@ -242,12 +242,12 @@ public class GeneratePropertyNameActionHandler
 		}
 
 		// must be at least one field for selection
-		if (!config.enableMethods && numberOfFields == 0) {
+		if (!config.isEnableMethods() && numberOfFields == 0) {
 			return false;
 		}
 
 		// must be at least one field or method for selection
-		return !(config.enableMethods && Math.max(numberOfFields, numberOfMethods) == 0);
+		return !(config.isEnableMethods() && Math.max(numberOfFields, numberOfMethods) == 0);
 
 	}
 

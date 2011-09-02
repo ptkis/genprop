@@ -1,39 +1,27 @@
 <?xml version="1.0"?>
 
-<project name="tostring" default="init" basedir=".">
-    <import file="genprop.xml"/>
+<project name="genprop" default="init" basedir=".">
+	<import file="genprop.xml"/>
 	<property name="dist.dir" value="dist"/>
 	<property name="name" value="genprop"/>
 	<property name="javadoc.dir" value="doc/api"/>
 	<property name="src.java.dir" value="src"/>
-    <target name="dist" depends="compile.module.genprop.production">
-        <mkdir dir="${genprop.output.dir}/META-INF/"/>
-		<mkdir dir="${dist.dir}"/>
-        <copy tofile="${genprop.output.dir}/META-INF/plugin.xml" file="META-INF/plugin4.xml"/>
-        <jar jarfile="${dist.dir}/${name}.jar" update="false" >
-            <fileset dir="${genprop.output.dir}"/>
-            <fileset dir="." file="README.TXT"/>
-            <fileset dir="." file="CHANGELOG.TXT"/>
-            <fileset dir="." file="CONTRIB.TXT"/>
-            <fileset dir="resources">
-                <include name="inspectionDescriptions/*.html"/>
-            </fileset>
-        </jar>
-    </target>
+	<target name="dist" depends="plugin.build.jar.genprop">
+	</target>
 
-    <target name="javadoc" depends="compile.module.genprop">
-        <javadoc destdir="${javadoc.dir}"
-                 packagenames="org.intellij.idea.plugin.genprop.*"
-                 sourcepath="${src.java.dir}"
-                 use="false"
-                 author="true"
-                 version="false"
-                 windowtitle="Generate toString() plugin for Intellij IDEA"
-                 doctitle="Generate toString() plugin for Intellij IDEA"
-                 public="true"
-                 breakiterator="true">
-            <classpath refid="project.classpath5"/>
-        </javadoc>
-    </target>
+	<target name="javadoc" depends="compile.module.genprop">
+		<javadoc destdir="${javadoc.dir}"
+				 packagenames="org.intellij.idea.plugin.genprop.*"
+				 sourcepath="${src.java.dir}"
+				 use="false"
+				 author="true"
+				 version="false"
+				 windowtitle="Generate toString() plugin for Intellij IDEA"
+				 doctitle="Generate toString() plugin for Intellij IDEA"
+				 public="true"
+				 breakiterator="true">
+			<classpath refid="project.classpath5"/>
+		</javadoc>
+	</target>
 
 </project>

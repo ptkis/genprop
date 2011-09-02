@@ -22,7 +22,7 @@ Suggestions/Ideas:
 - Improve documentation (images in wiki, more velocity examples using $class features)
 - Any JDK1.5 impacts
 - Calculate average length of toString length to initialize StringBuffer initial capacity (should only be possible for fixed length toString's)
-- Refactor GenerateToStringAction seperating actual code generation logic from IDEA and UI
+- Refactor GeneratePropertyAction seperating actual code generation logic from IDEA and UI
 - Always use template from file instead of IDEA streamed configuration
 - Generate toString() for multiple classes (for fast generation of toString() in classes that for instance has been code generated)
 - List of recently used templates (like ctrl + e) to choose template to apply

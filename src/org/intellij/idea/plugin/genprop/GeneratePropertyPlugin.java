@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 /**
@@ -22,16 +21,16 @@ import javax.swing.JComponent;
  *
  * @author Claus Ibsen
  */
-public class GeneratePropertyNamePlugin
+public class GeneratePropertyPlugin
 		implements ApplicationComponent, InspectionToolProvider {
 
-	private static final Logger log = Logger.getLogger(GeneratePropertyNamePlugin.class);
+	private static final Logger log = Logger.getLogger(GeneratePropertyPlugin.class);
 	private ConfigUI configUI;
 	private Config config = new Config();
 
 	@NotNull
 	public String getComponentName() {
-		return "GeneratePropertyNames";
+		return "GenerateProperty";
 	}
 
 	public void initComponent() {
@@ -41,15 +40,11 @@ public class GeneratePropertyNamePlugin
 	}
 
 	public String getDisplayName() {
-		return "GeneratePropertyNames";
+		return "Generate Property";
 	}
 
 	@Nullable
 	public Icon getIcon() {
-		java.net.URL resource = getClass().getResource("/resources/configurableToStringPlugin.png");
-		if (resource != null) {
-			return new ImageIcon(resource);
-		}
 		return null;
 	}
 
@@ -76,9 +71,9 @@ public class GeneratePropertyNamePlugin
 
 		// update menus according the settings
 		if (config.isDisableActionInMenus()) {
-			GeneratePropertyNameAction.disableActionInMenus();
+			GeneratePropertyAction.disableActionInMenus();
 		} else {
-			GeneratePropertyNameAction.enableActionsInMenus();
+			GeneratePropertyAction.enableActionsInMenus();
 		}
 
 		if (log.isDebugEnabled()) {

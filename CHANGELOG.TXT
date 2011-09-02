@@ -99,7 +99,7 @@ v2.11 for IDEA 3.x/4.x (mar-24-2004)
 
 v2.10 for IDEA 3.x/4.x (mar-10-2004)
 ====================================
-- Renamed plugin back to GenerateToString (without 2) to use the original plugin from the IDEA PluginManager
+- Renamed plugin back to GenerateProperty (without 2) to use the original plugin from the IDEA PluginManager
 - New feature in Settings: Save template
 - New feature in Settings: Automatic add implements java.io.Serializable if absent
 - New feature in Settings: Automatic import these packages (is user defined)
