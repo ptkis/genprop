@@ -4,6 +4,7 @@ import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
+import org.intellij.idea.plugin.genprop.AbstractGenerateActionHandler;
 import org.intellij.idea.plugin.genprop.GeneratePropertyActionHandler;
 import org.intellij.idea.plugin.genprop.GeneratePropertyNameContext;
 import org.intellij.idea.plugin.genprop.psi.PsiAdapter;
@@ -30,7 +31,7 @@ public class PropertyHasNoNameConstantQuickFix
 	public void applyFix(Project project, ProblemDescriptor desc) {
 		PsiClass clazz = psi.findClass(desc.getPsiElement());
 
-		GeneratePropertyActionHandler handler = new GeneratePropertyActionHandler();
+		AbstractGenerateActionHandler handler = new GeneratePropertyActionHandler();
 		handler.executeAction(project, clazz);
 	}
 

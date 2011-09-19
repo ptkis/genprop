@@ -2,13 +2,13 @@
 <idea-plugin>
 	<name>GenerateProperties</name>
 	<description>Adds a new menu Generate Properties in the generate menu (alt + ins) to generate getter, setter and property name constants of fields.</description>
-	<version>0.04</version>
+	<version>0.06</version>
 	<vendor email="thomas@katalisindonesia.com">Thomas Edwin Santosa</vendor>
-	<idea-version since-build="102.000"/>
+	<idea-version since-build="107.000"/>
 	<!-- 1162 to be avail for both IDEA 4.0x and IDEA4.5x -->
 
 	<change-notes>
-		1) Compiled with IDEA build 107.509
+		1) Added support for generating getter and setter with property change
 	</change-notes>
 
 	<application-components>
@@ -26,7 +26,16 @@
 				text="Generate _properties" description="Generate properties"/>
 		<group id="Actions.ActionsPlugin.GeneratePropertyGroup" text="Generate _properties"
 			   description="Generate property name constants">
-			<reference id="Actions.ActionsPlugin.GenerateProperties"/>
+			<reference ref="Actions.ActionsPlugin.GenerateProperties"/>
+			<add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Generate"/>
+			<add-to-group group-id="CodeMenu" anchor="after" relative-to-action="Generate"/>
+		</group>
+		<action id="Actions.ActionsPlugin.GenerateGetterSetterBeans"
+				class="org.intellij.idea.plugin.genprop.GenerateGetterSetterAction"
+				text="Generate getter setter beans" description="Generate getter setter with property change support"/>
+		<group id="Actions.ActionsPlugin.GenerateGetterSetterBeansGroup" text="Generate getter setter _beans"
+			   description="Generate property name constants">
+			<reference ref="Actions.ActionsPlugin.GenerateGetterSetterBeans"/>
 			<add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Generate"/>
 			<add-to-group group-id="CodeMenu" anchor="after" relative-to-action="Generate"/>
 		</group>
@@ -37,7 +46,17 @@
 				description="Generate property name constants"/>
 		<group id="Actions.ActionsPlugin.GeneratePropertiesGenerateGroup" text="Property Name Constants"
 			   description="Generate property name constants">
-			<reference id="Actions.ActionsPlugin.GeneratePropertiesGG"/>
+			<reference ref="Actions.ActionsPlugin.GeneratePropertiesGG"/>
+			<add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GenerateEquals"/>
+		</group>
+
+		<!-- add property name constants in the generate menu (alt + ins) -->
+		<action id="Actions.ActionsPlugin.GenerateGetterSetterBeansGG"
+				class="org.intellij.idea.plugin.genprop.GenerateGetterSetterAction" text="Getter setter beans"
+				description="Generate getter setter with property change support"/>
+		<group id="Actions.ActionsPlugin.GenerateGetterSetterBeansGenerateGroup" text="Getter setter beans"
+			   description="Generate getter setter with property change support">
+			<reference ref="Actions.ActionsPlugin.GenerateGetterSetterBeansGG"/>
 			<add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GenerateEquals"/>
 		</group>
 

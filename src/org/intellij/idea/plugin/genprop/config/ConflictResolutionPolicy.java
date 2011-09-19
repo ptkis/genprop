@@ -2,8 +2,10 @@ package org.intellij.idea.plugin.genprop.config;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiDocCommentOwner;
 import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiField;
+import com.intellij.psi.PsiMethod;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
 
@@ -33,18 +35,33 @@ public interface ConflictResolutionPolicy {
 			throws IncorrectOperationException;
 
 	/**
+	 * Applies the choosen policy.
+	 *
+	 * @param editor
+	 * @param clazz PSIClass.
+	 * @param existingMethod existing method if one exists.
+	 * @param newMethod new method. @return if the policy was executed normally (not cancelled)
+	 *
+	 * @throws IncorrectOperationException is thrown if there is an IDEA error.
+	 */
+	boolean applyMethod(Editor editor,
+			PsiClass clazz,
+			PsiMethod existingMethod,
+			PsiMethod newMethod)
+			throws IncorrectOperationException;
+
+	/**
 	 * Applies the choose policy for javadoc.
 	 *
 	 * @param clazz PSIClass
-	 * @param newField New toString method
+	 * @param newElement
 	 * @param codeStyleManager
 	 * @param elementFactory Element factory
 	 * @param existingJavaDoc Existing javadoc if any
 	 * @param newJavaDoc The new javadoc if any @return                   true if javadoc replace, false if left as it
-	 * was before @throws IncorrectOperationException is thrown if there is an IDEA error. @since 2.20
 	 */
 	boolean applyJavaDoc(PsiClass clazz,
-			PsiField newField,
+			PsiDocCommentOwner newElement,
 			CodeStyleManager codeStyleManager,
 			PsiElementFactory elementFactory,
 			String existingJavaDoc,

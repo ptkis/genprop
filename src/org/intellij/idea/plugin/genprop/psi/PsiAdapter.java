@@ -107,7 +107,7 @@ public abstract class PsiAdapter {
 
 	/**
 	 * Returns true if a field is constant. <p/> This is identifed as the name of the field is only in uppercase and it has
-	 * a <code>static</code> modifier.
+	 * a {@code static} modifier.
 	 *
 	 * @param field field to check if it's a constant
 	 *
@@ -339,7 +339,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>transient</code> modifier? <p/>eg: <code>private transient String myField;</code>.
+	 * Is there a {@code transient} modifier? <p/>eg: {@code private transient String myField;}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -348,7 +348,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>volatile</code> modifier? <p/>eg: <code>private volatile Image screen;</code>.
+	 * Is there a {@code volatile} modifier? <p/>eg: {@code private volatile Image screen;}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -357,7 +357,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>public</code> modifier? <p/>eg: <code>public String myField;</code>.
+	 * Is there a {@code public} modifier? <p/>eg: {@code public String myField;}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -366,7 +366,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>protected</code> modifier? <p/>eg: <code>public String myField;</code>.
+	 * Is there a {@code protected} modifier? <p/>eg: {@code public String myField;}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -375,7 +375,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>package-local</code> modifier? <p/>eg: <code>String myField;</code>.
+	 * Is there a {@code package-local} modifier? <p/>eg: {@code String myField;}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -384,7 +384,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>private</code> modifier? <p/>eg: <code>private static String myField;</code>.
+	 * Is there a {@code private} modifier? <p/>eg: {@code private static String myField;}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -393,7 +393,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>abstract</code> modifier? <p/>eg: <code>public abstract String getConfiguration()</code>.
+	 * Is there a {@code abstract} modifier? <p/>eg: {@code public abstract String getConfiguration()}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -402,7 +402,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>final</code> modifier? <p/>eg: <code>final static boolean DEBUG = false;</code>.
+	 * Is there a {@code final} modifier? <p/>eg: {@code final static boolean DEBUG = false;}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -411,7 +411,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>static</code> modifier? <p/>eg: <code>private static String getMyField()</code>.
+	 * Is there a {@code static} modifier? <p/>eg: {@code private static String getMyField()}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -420,7 +420,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is there a <code>synchronized</code> modifier? <p/>eg: <code>public synchronized void putInCache()</code>.
+	 * Is there a {@code synchronized} modifier? <p/>eg: {@code public synchronized void putInCache()}.
 	 *
 	 * @param modifiers the modifiers
 	 */
@@ -730,7 +730,7 @@ public abstract class PsiAdapter {
 	 *
 	 * @param factory element factory.
 	 * @param codeStyleManager CodeStyleManager.
-	 * @param field the method the javadoc should be added/set to.
+	 * @param element
 	 * @param javadoc the javadoc comment.
 	 * @param replace true if any existing javadoc should be replaced. false will not replace any existing javadoc and thus
 	 * leave the javadoc untouched.
@@ -743,19 +743,19 @@ public abstract class PsiAdapter {
 	@Nullable
 	public PsiComment addOrReplaceJavadoc(PsiElementFactory factory,
 			CodeStyleManager codeStyleManager,
-			PsiField field,
+			PsiDocCommentOwner element,
 			String javadoc,
 			boolean replace)
 			throws IncorrectOperationException {
 		PsiComment comment = factory.createCommentFromText(javadoc, null);
 
 		// does a method already exists?
-		PsiDocComment doc = field.getDocComment();
+		PsiDocComment doc = element.getDocComment();
 		if (doc != null) {
 			if (replace) {
 				// javadoc already exists, so replace
 				doc.replace(comment);
-				codeStyleManager.reformat(field); // to reformat javadoc
+				codeStyleManager.reformat(element); // to reformat javadoc
 				return comment;
 			} else {
 				// do not replace existing javadoc
@@ -763,8 +763,8 @@ public abstract class PsiAdapter {
 			}
 		} else {
 			// add new javadoc
-			field.addBefore(comment, field.getFirstChild());
-			codeStyleManager.reformat(field); // to reformat javadoc
+			element.addBefore(comment, element.getFirstChild());
+			codeStyleManager.reformat(element); // to reformat javadoc
 			return comment;
 		}
 	}
@@ -804,7 +804,7 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Find's an existing field with the given name. If there isn't a field with the name, null is returned.
+	 * Finds an existing field with the given name. If there isn't a field with the name, null is returned.
 	 *
 	 * @param clazz the class
 	 * @param name name of field to find
@@ -827,6 +827,29 @@ public abstract class PsiAdapter {
 	}
 
 	/**
+	 * Finds an existing method with the given name. If there isn't a method with the name, null is returned.
+	 *
+	 * @param clazz the class
+	 * @param name name of method to find
+	 *
+	 * @return the found method, null if none exist
+	 */
+	@Nullable
+	public PsiMethod findAllMethodByName(PsiClass clazz, String name) {
+		PsiMethod[] methods = clazz.getAllMethods();
+
+		// use reverse to find from bottom as the duplicate conflict resolution policy requires this
+		for (int i = methods.length - 1; i >= 0; i--) {
+			PsiMethod method = methods[i];
+			if (name.equals(method.getName())) {
+				return method;
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Is the given type a "void" type.
 	 *
 	 * @param type the type.
@@ -838,8 +861,8 @@ public abstract class PsiAdapter {
 	}
 
 	/**
-	 * Is the method a getter method? <p/> The name of the method must start with <code>get</code> or <code>is</code>. And
-	 * if the method is a <code>isXXX</code> then the method must return a java.lang.Boolean or boolean.
+	 * Is the method a getter method? <p/> The name of the method must start with {@code get} or {@code is}. And if the
+	 * method is a {@code isXXX} then the method must return a java.lang.Boolean or boolean.
 	 *
 	 * @param factory element factory.
 	 * @param method the method
@@ -863,8 +886,8 @@ public abstract class PsiAdapter {
 
 	/**
 	 * Get's the field name of the getter method. <p/> The method must be a getter method for a field. Returns null if this
-	 * method is not a getter. <p/> The fieldname is the part of the name that is after the <code>get</code> or
-	 * <code>is</code> part of the name. <p/> Example: methodName=getName will return fieldname=name
+	 * method is not a getter. <p/> The fieldname is the part of the name that is after the {@code get} or {@code is} part
+	 * of the name. <p/> Example: methodName=getName will return fieldname=name
 	 *
 	 * @param factory element factory.
 	 * @param method the method
@@ -1238,7 +1261,6 @@ public abstract class PsiAdapter {
 		GlobalSearchScope scope = list.getReferencedTypes()[0].getResolveScope();
 		String classname = list.getReferencedTypes()[0].getCanonicalText();
 
-		PsiManager manager = getPsiManager(project);
 		JavaPsiFacade psiFacade = JavaPsiFacade.getInstance(project);
 		return psiFacade.findClass(classname, scope);
 	}
@@ -1291,18 +1313,15 @@ public abstract class PsiAdapter {
 		}
 
 		PsiType subType = type.getDeepComponentType();
-		if (subType.isAssignableFrom(PsiType.BOOLEAN) ||
+		return subType.isAssignableFrom(PsiType.BOOLEAN) ||
 				subType.isAssignableFrom(PsiType.BYTE) ||
 				subType.isAssignableFrom(PsiType.CHAR) ||
 				subType.isAssignableFrom(PsiType.DOUBLE) ||
 				subType.isAssignableFrom(PsiType.FLOAT) ||
 				subType.isAssignableFrom(PsiType.INT) ||
 				subType.isAssignableFrom(PsiType.LONG) ||
-				subType.isAssignableFrom(PsiType.SHORT)) {
-			return true;
-		}
+				subType.isAssignableFrom(PsiType.SHORT);
 
-		return false;
 	}
 
 	/**
@@ -1352,12 +1371,14 @@ public abstract class PsiAdapter {
 	 */
 	@Nullable
 	public static PsiMethod findParentMethod(PsiElement elem) {
-		if (elem == null) {
-			return null;
-		} else if (elem instanceof PsiMethod) {
-			return (PsiMethod) elem;
+		while (true) {
+			if (elem == null) {
+				return null;
+			} else if (elem instanceof PsiMethod) {
+				return (PsiMethod) elem;
+			}
+			elem = elem.getParent();
 		}
-		return findParentMethod(elem.getParent());
 	}
 
 	/**
