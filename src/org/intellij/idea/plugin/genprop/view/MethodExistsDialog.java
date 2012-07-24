@@ -13,9 +13,9 @@ import javax.swing.*;
  * <p/>
  * The user now has the choices to either:
  * <ul>
- *    <li/>Replace existing method
- *    <li/>Create a duplicate method
- *    <li/>Cancel
+ * <li/>Replace existing method
+ * <li/>Create a duplicate method
+ * <li/>Cancel
  * </ul>
  *
  * @author Claus Ibsen
@@ -26,8 +26,8 @@ public class MethodExistsDialog {
      * Options for this dialog
      */
     private static ConflictResolutionPolicy[] options = {ReplacePolicy.getInstance(),
-                                                         DuplicatePolicy.getInstance(),
-                                                         CancelPolicy.getInstance()};
+            DuplicatePolicy.getInstance(),
+            CancelPolicy.getInstance()};
 
     /**
      * Get's the options for this dialog.
@@ -43,9 +43,9 @@ public class MethodExistsDialog {
      * <p/>
      * The user now has the choices to either:
      * <ul>
-     *    <li/>Replace existing method
-     *    <li/>Create a duplicate method
-     *    <li/>Cancel
+     * <li/>Replace existing method
+     * <li/>Create a duplicate method
+     * <li/>Cancel
      * </ul>
      *
      * @param parentComponent determines the Frame in which the dialog is displayed; if null, or if the parentComponent has no Frame, a default Frame is used.

@@ -44,7 +44,8 @@ public class TemplateResource implements Serializable {
 
     /**
      * Important to return filename only as it is the displayname in the UI.
-     * @return  filename for UI.
+     *
+     * @return filename for UI.
      */
     public String toString() {
         return fileName != null ? fileName : template;

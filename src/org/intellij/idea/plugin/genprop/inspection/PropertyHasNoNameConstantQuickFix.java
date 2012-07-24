@@ -16,28 +16,28 @@ import org.intellij.idea.plugin.genprop.psi.PsiAdapter;
  * @since 2.20
  */
 public class PropertyHasNoNameConstantQuickFix
-		implements LocalQuickFix {
+        implements LocalQuickFix {
 
-	private PsiAdapter psi;
+    private PsiAdapter psi;
 
-	public PropertyHasNoNameConstantQuickFix() {
-		psi = GeneratePropertyNameContext.getPsi();
-	}
+    public PropertyHasNoNameConstantQuickFix() {
+        psi = GeneratePropertyNameContext.getPsi();
+    }
 
-	public String getName() {
-		return "Generate property name constants";
-	}
+    public String getName() {
+        return "Generate property name constants";
+    }
 
-	public void applyFix(Project project, ProblemDescriptor desc) {
-		PsiClass clazz = psi.findClass(desc.getPsiElement());
+    public void applyFix(Project project, ProblemDescriptor desc) {
+        PsiClass clazz = psi.findClass(desc.getPsiElement());
 
-		AbstractGenerateActionHandler handler = new GeneratePropertyActionHandler();
-		handler.executeAction(project, clazz);
-	}
+        AbstractGenerateActionHandler handler = new GeneratePropertyActionHandler();
+        handler.executeAction(project, clazz);
+    }
 
-	//to appear in "Apply Fix" statement when multiple Quick Fixes exist
-	public String getFamilyName() {
-		return "Java Bean";
-	}
+    //to appear in "Apply Fix" statement when multiple Quick Fixes exist
+    public String getFamilyName() {
+        return "Java Bean";
+    }
 
 }

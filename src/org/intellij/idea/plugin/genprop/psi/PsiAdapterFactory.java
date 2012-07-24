@@ -6,9 +6,8 @@ import org.apache.log4j.Logger;
 /**
  * Factory to get a PsiAdapter class compatible with the correct version of IDEA 3.x or 4.x/4.5x.
  *
- * @see PsiAdapter
- *
  * @author Claus Ibsen
+ * @see PsiAdapter
  */
 public class PsiAdapterFactory {
 
@@ -18,7 +17,7 @@ public class PsiAdapterFactory {
     /**
      * Gets a version of PsiAdapter that is compatible with IDEA 4.x/4.5x or IDEA 3.x.
      *
-     * @return  the PsiAdapter used for the current version of IDEA.
+     * @return the PsiAdapter used for the current version of IDEA.
      */
     public static PsiAdapter getPsiAdapter() {
         if (instance == null) {
@@ -32,7 +31,7 @@ public class PsiAdapterFactory {
                     instance = (PsiAdapter) clazz.newInstance();
                 } else {
                     log.info("Assuming to be running IDEA 4.x/4.5x version");
-                    Class clazz = Class.forName("org.intellij.idea.plugin.genprop.psi.idea4.PsiAdapter7");
+                    Class clazz = Class.forName("org.intellij.idea.plugin.genprop.psi.PsiAdapter");
                     instance = (PsiAdapter) clazz.newInstance();
                 }
             } catch (IllegalAccessException e) {
@@ -52,6 +51,7 @@ public class PsiAdapterFactory {
 
     /**
      * Check if running IDEA 3.x
+     *
      * @return true if running IDEA 3.x
      */
     private static boolean runningIdea3() {
@@ -61,6 +61,7 @@ public class PsiAdapterFactory {
 
     /**
      * Logs the IDEA Application Info to the logger.
+     *
      * @since 2.18
      */
     private static void logIDEAApplicationInfo(ApplicationInfo info) {

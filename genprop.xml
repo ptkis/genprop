@@ -2,174 +2,174 @@
 <project name="genprop" default="all">
 
 
-	<property file="genprop.properties"/>
-	<!-- Uncomment the following property if no tests compilation is needed -->
-	<!-- 
-	  <property name="skip.tests" value="true"/>
-	   -->
+    <property file="genprop.properties"/>
+    <!-- Uncomment the following property if no tests compilation is needed -->
+    <!--
+       <property name="skip.tests" value="true"/>
+        -->
 
-	<!-- Compiler options -->
+    <!-- Compiler options -->
 
-	<property name="compiler.debug" value="on"/>
-	<property name="compiler.generate.no.warnings" value="off"/>
-	<property name="compiler.args" value=""/>
-	<property name="compiler.max.memory" value="128m"/>
-	<patternset id="ignored.files">
-		<exclude name="**/CVS/**"/>
-		<exclude name="**/SCCS/**"/>
-		<exclude name="**/RCS/**"/>
-		<exclude name="**/.DS_Store/**"/>
-		<exclude name="**/.svn/**"/>
-		<exclude name="**/.pyc/**"/>
-		<exclude name="**/.pyo/**"/>
-		<exclude name="**/*.pyc/**"/>
-		<exclude name="**/*.pyo/**"/>
-		<exclude name="**/.git/**"/>
-		<exclude name="**/.sbas/**"/>
-		<exclude name="**/.IJI.*/**"/>
-		<exclude name="**/vssver.scc/**"/>
-		<exclude name="**/vssver2.scc/**"/>
-		<exclude name="**/*.hprof/**"/>
-		<exclude name="**/_svn/**"/>
-		<exclude name="**/.hg/**"/>
-		<exclude name="**/*.lib/**"/>
-		<exclude name="**/*~/**"/>
-		<exclude name="**/*.orig/**"/>
-		<exclude name="**/__pycache__/**"/>
-		<exclude name="**/.bundle/**"/>
-	</patternset>
-	<patternset id="library.patterns">
-		<include name="*.war"/>
-		<include name="*.ear"/>
-		<include name="*.zip"/>
-		<include name="*.swc"/>
-		<include name="*.egg"/>
-		<include name="*.jar"/>
-	</patternset>
-	<patternset id="compiler.resources">
-		<include name="**/?*.properties"/>
-		<include name="**/?*.xml"/>
-		<include name="**/?*.gif"/>
-		<include name="**/?*.png"/>
-		<include name="**/?*.jpeg"/>
-		<include name="**/?*.jpg"/>
-		<include name="**/?*.html"/>
-		<include name="**/?*.dtd"/>
-		<include name="**/?*.tld"/>
-		<include name="**/?*.vm"/>
-	</patternset>
-
-
-	<!-- Global Libraries -->
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.generate.no.warnings" value="off"/>
+    <property name="compiler.args" value=""/>
+    <property name="compiler.max.memory" value="128m"/>
+    <patternset id="ignored.files">
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/.pyc/**"/>
+        <exclude name="**/.pyo/**"/>
+        <exclude name="**/*.pyc/**"/>
+        <exclude name="**/*.pyo/**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name="**/.sbas/**"/>
+        <exclude name="**/.IJI.*/**"/>
+        <exclude name="**/vssver.scc/**"/>
+        <exclude name="**/vssver2.scc/**"/>
+        <exclude name="**/*.hprof/**"/>
+        <exclude name="**/_svn/**"/>
+        <exclude name="**/.hg/**"/>
+        <exclude name="**/*.lib/**"/>
+        <exclude name="**/*~/**"/>
+        <exclude name="**/*.orig/**"/>
+        <exclude name="**/__pycache__/**"/>
+        <exclude name="**/.bundle/**"/>
+    </patternset>
+    <patternset id="library.patterns">
+        <include name="*.war"/>
+        <include name="*.ear"/>
+        <include name="*.zip"/>
+        <include name="*.swc"/>
+        <include name="*.egg"/>
+        <include name="*.jar"/>
+    </patternset>
+    <patternset id="compiler.resources">
+        <include name="**/?*.properties"/>
+        <include name="**/?*.xml"/>
+        <include name="**/?*.gif"/>
+        <include name="**/?*.png"/>
+        <include name="**/?*.jpeg"/>
+        <include name="**/?*.jpg"/>
+        <include name="**/?*.html"/>
+        <include name="**/?*.dtd"/>
+        <include name="**/?*.tld"/>
+        <include name="**/?*.vm"/>
+    </patternset>
 
 
-	<!-- Application Server Libraries -->
-
-	<!-- Modules -->
+    <!-- Global Libraries -->
 
 
-	<!-- Module genprop -->
+    <!-- Application Server Libraries -->
 
-	<dirname property="module.genprop.basedir" file="${ant.file}"/>
-
-
-	<property name="compiler.args.genprop" value="${compiler.args}"/>
-
-	<property name="genprop.output.dir" value="${module.genprop.basedir}/classes/production/genprop"/>
-	<property name="genprop.testoutput.dir" value="${module.genprop.basedir}/classes/test/genprop"/>
-
-	<path id="genprop.module.bootclasspath">
-		<!-- Paths to be included in compilation bootclasspath -->
-	</path>
-
-	<path id="genprop.module.production.classpath"/>
-
-	<path id="genprop.runtime.production.module.classpath">
-		<pathelement location="${genprop.output.dir}"/>
-	</path>
-
-	<path id="genprop.module.classpath">
-		<pathelement location="${genprop.output.dir}"/>
-	</path>
-
-	<path id="genprop.runtime.module.classpath">
-		<pathelement location="${genprop.testoutput.dir}"/>
-		<pathelement location="${genprop.output.dir}"/>
-	</path>
+    <!-- Modules -->
 
 
-	<patternset id="excluded.from.module.genprop">
-		<patternset refid="ignored.files"/>
-	</patternset>
+    <!-- Module genprop -->
 
-	<patternset id="excluded.from.compilation.genprop">
-		<patternset refid="excluded.from.module.genprop"/>
-	</patternset>
-
-	<path id="genprop.module.sourcepath">
-		<dirset dir="${module.genprop.basedir}">
-			<include name="resources"/>
-			<include name="src"/>
-		</dirset>
-	</path>
+    <dirname property="module.genprop.basedir" file="${ant.file}"/>
 
 
-	<target name="compile.module.genprop" depends="compile.module.genprop.production,compile.module.genprop.tests"
-			description="Compile module genprop"/>
+    <property name="compiler.args.genprop" value="${compiler.args}"/>
 
-	<target name="compile.module.genprop.production" description="Compile module genprop; production classes">
-		<mkdir dir="${genprop.output.dir}"/>
-		<javac destdir="${genprop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
-			   memorymaximumsize="${compiler.max.memory}" fork="true">
-			<compilerarg line="${compiler.args.genprop}"/>
-			<bootclasspath refid="genprop.module.bootclasspath"/>
-			<classpath refid="genprop.module.production.classpath"/>
-			<src refid="genprop.module.sourcepath"/>
-			<patternset refid="excluded.from.compilation.genprop"/>
-		</javac>
+    <property name="genprop.output.dir" value="${module.genprop.basedir}/classes/production/genprop"/>
+    <property name="genprop.testoutput.dir" value="${module.genprop.basedir}/classes/test/genprop"/>
 
-		<copy todir="${genprop.output.dir}">
-			<fileset dir="${module.genprop.basedir}/resources">
-				<patternset refid="compiler.resources"/>
-				<type type="file"/>
-			</fileset>
-			<fileset dir="${module.genprop.basedir}/src">
-				<patternset refid="compiler.resources"/>
-				<type type="file"/>
-			</fileset>
-		</copy>
-	</target>
+    <path id="genprop.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
 
-	<target name="compile.module.genprop.tests" depends="compile.module.genprop.production"
-			description="compile module genprop; test classes" unless="skip.tests"/>
+    <path id="genprop.module.production.classpath"/>
 
-	<target name="clean.module.genprop" description="cleanup module">
-		<delete dir="${genprop.output.dir}"/>
-		<delete dir="${genprop.testoutput.dir}"/>
-	</target>
+    <path id="genprop.runtime.production.module.classpath">
+        <pathelement location="${genprop.output.dir}"/>
+    </path>
 
-	<property name="genprop.plugin.path.jar" value="${module.genprop.basedir}/genprop.jar"/>
+    <path id="genprop.module.classpath">
+        <pathelement location="${genprop.output.dir}"/>
+    </path>
 
-	<!-- Build archive for plugin 'genprop' -->
-	<target name="plugin.build.jar.genprop" depends="compile.module.genprop"
-			description="Build plugin archive for module &apos;genprop&apos;">
-		<jar destfile="${genprop.plugin.path.jar}" duplicate="preserve">
-			<zipfileset dir="${module.genprop.basedir}/classes/production/genprop"/>
-			<zipfileset file="${module.genprop.basedir}/META-INF/plugin.xml" prefix="META-INF"/>
-			<manifest>
-				<attribute name="Created-By" value="IntelliJ IDEA"/>
-				<attribute name="Manifest-Version" value="1.0"/>
-			</manifest>
-		</jar>
-	</target>
+    <path id="genprop.runtime.module.classpath">
+        <pathelement location="${genprop.testoutput.dir}"/>
+        <pathelement location="${genprop.output.dir}"/>
+    </path>
 
-	<target name="init" description="Build initialization">
-		<!-- Perform any build initialization in this target -->
-	</target>
 
-	<target name="clean" depends="clean.module.genprop" description="cleanup all"/>
+    <patternset id="excluded.from.module.genprop">
+        <patternset refid="ignored.files"/>
+    </patternset>
 
-	<target name="build.modules" depends="init, clean, plugin.build.jar.genprop" description="build all modules"/>
+    <patternset id="excluded.from.compilation.genprop">
+        <patternset refid="excluded.from.module.genprop"/>
+    </patternset>
 
-	<target name="all" depends="build.modules" description="build all"/>
+    <path id="genprop.module.sourcepath">
+        <dirset dir="${module.genprop.basedir}">
+            <include name="resources"/>
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.genprop" depends="compile.module.genprop.production,compile.module.genprop.tests"
+            description="Compile module genprop"/>
+
+    <target name="compile.module.genprop.production" description="Compile module genprop; production classes">
+        <mkdir dir="${genprop.output.dir}"/>
+        <javac destdir="${genprop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+               memorymaximumsize="${compiler.max.memory}" fork="true">
+            <compilerarg line="${compiler.args.genprop}"/>
+            <bootclasspath refid="genprop.module.bootclasspath"/>
+            <classpath refid="genprop.module.production.classpath"/>
+            <src refid="genprop.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.genprop"/>
+        </javac>
+
+        <copy todir="${genprop.output.dir}">
+            <fileset dir="${module.genprop.basedir}/resources">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${module.genprop.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.genprop.tests" depends="compile.module.genprop.production"
+            description="compile module genprop; test classes" unless="skip.tests"/>
+
+    <target name="clean.module.genprop" description="cleanup module">
+        <delete dir="${genprop.output.dir}"/>
+        <delete dir="${genprop.testoutput.dir}"/>
+    </target>
+
+    <property name="genprop.plugin.path.jar" value="${module.genprop.basedir}/genprop.jar"/>
+
+    <!-- Build archive for plugin 'genprop' -->
+    <target name="plugin.build.jar.genprop" depends="compile.module.genprop"
+            description="Build plugin archive for module &apos;genprop&apos;">
+        <jar destfile="${genprop.plugin.path.jar}" duplicate="preserve">
+            <zipfileset dir="${module.genprop.basedir}/classes/production/genprop"/>
+            <zipfileset file="${module.genprop.basedir}/META-INF/plugin.xml" prefix="META-INF"/>
+            <manifest>
+                <attribute name="Created-By" value="IntelliJ IDEA"/>
+                <attribute name="Manifest-Version" value="1.0"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="init" description="Build initialization">
+        <!-- Perform any build initialization in this target -->
+    </target>
+
+    <target name="clean" depends="clean.module.genprop" description="cleanup all"/>
+
+    <target name="build.modules" depends="init, clean, plugin.build.jar.genprop" description="build all modules"/>
+
+    <target name="all" depends="build.modules" description="build all"/>
 </project>

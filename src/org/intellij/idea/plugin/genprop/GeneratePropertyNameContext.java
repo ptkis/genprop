@@ -52,7 +52,7 @@ public class GeneratePropertyNameContext {
         }
         return project;
     }
-                          
+
     public static void setProject(Project newProject) {
         project = newProject;
     }

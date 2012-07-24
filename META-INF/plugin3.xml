@@ -1,42 +1,45 @@
 <idea-plugin url="http://www.intellij.org/twiki/bin/view/Main/ToStringPlugin">
-	<name>GenerateProperty</name>
-	<description>Adds a new menu 'toString()' in the generate menu (alt + ins) to generate a toString() method that dumps the classes fields. Body code is generated using Velocity Macro and you can change this to fit your needs in the settings. See the plugin homepage for information available in the Velocity Macro.</description>
-	<version>2.19</version>
-	<vendor email="cib_rejse@yahoo.dk">Claus Ibsen</vendor>
-	<idea-version min="3.0" max="3.1"/>
+    <name>GenerateProperty</name>
+    <description>Adds a new menu 'toString()' in the generate menu (alt + ins) to generate a toString() method that
+        dumps the classes fields. Body code is generated using Velocity Macro and you can change this to fit your needs
+        in the settings. See the plugin homepage for information available in the Velocity Macro.
+    </description>
+    <version>2.19</version>
+    <vendor email="cib_rejse@yahoo.dk">Claus Ibsen</vendor>
+    <idea-version min="3.0" max="3.1"/>
 
-	<change-notes>Not released for IDEA 3.x</change-notes>
+    <change-notes>Not released for IDEA 3.x</change-notes>
 
-	<application-components>
-		<component>
-			<implementation-class>org.intellij.idea.plugin.genprop.GeneratePropertyPlugin</implementation-class>
-			<interface-class>org.intellij.idea.plugin.genprop.GeneratePropertyPlugin</interface-class>
-		</component>
-	</application-components>
+    <application-components>
+        <component>
+            <implementation-class>org.intellij.idea.plugin.genprop.GeneratePropertyPlugin</implementation-class>
+            <interface-class>org.intellij.idea.plugin.genprop.GeneratePropertyPlugin</interface-class>
+        </component>
+    </application-components>
 
-	<actions>
+    <actions>
 
-		<!-- add toString() in code and right-click menus -->
-		<action id="Actions.ActionsPlugin.GenerateProperty"
-				class="org.intellij.idea.plugin.genprop.GeneratePropertyAction" text="Generate to_String()"
-				description="Generate toString() method"/>
-		<group id="Actions.ActionsPlugin.GeneratePropertyGroup" text="Generate to_String()"
-			   description="Generate toString() method">
-			<reference id="Actions.ActionsPlugin.GenerateProperty"/>
-			<add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Generate"/>
-			<add-to-group group-id="CodeMenu" anchor="after" relative-to-action="Generate"/>
-		</group>
+        <!-- add toString() in code and right-click menus -->
+        <action id="Actions.ActionsPlugin.GenerateProperty"
+                class="org.intellij.idea.plugin.genprop.GeneratePropertyAction" text="Generate to_String()"
+                description="Generate toString() method"/>
+        <group id="Actions.ActionsPlugin.GeneratePropertyGroup" text="Generate to_String()"
+               description="Generate toString() method">
+            <reference id="Actions.ActionsPlugin.GenerateProperty"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Generate"/>
+            <add-to-group group-id="CodeMenu" anchor="after" relative-to-action="Generate"/>
+        </group>
 
-		<!-- add toString() in the generate menu (alt + ins) -->
-		<action id="Actions.ActionsPlugin.GeneratePropertyGG"
-				class="org.intellij.idea.plugin.genprop.GeneratePropertyAction" text="to_String()"
-				description="Generate toString() method"/>
-		<group id="Actions.ActionsPlugin.GeneratePropertyGenerateGroup" text="to_String()"
-			   description="Generate toString() method">
-			<reference id="Actions.ActionsPlugin.GeneratePropertyGG"/>
-			<add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GenerateEquals"/>
-		</group>
+        <!-- add toString() in the generate menu (alt + ins) -->
+        <action id="Actions.ActionsPlugin.GeneratePropertyGG"
+                class="org.intellij.idea.plugin.genprop.GeneratePropertyAction" text="to_String()"
+                description="Generate toString() method"/>
+        <group id="Actions.ActionsPlugin.GeneratePropertyGenerateGroup" text="to_String()"
+               description="Generate toString() method">
+            <reference id="Actions.ActionsPlugin.GeneratePropertyGG"/>
+            <add-to-group group-id="GenerateGroup" anchor="after" relative-to-action="GenerateEquals"/>
+        </group>
 
-	</actions>
+    </actions>
 
 </idea-plugin>

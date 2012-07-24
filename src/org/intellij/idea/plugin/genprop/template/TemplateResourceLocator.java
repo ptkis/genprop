@@ -22,10 +22,14 @@ public class TemplateResourceLocator {
 
     private static Logger log = Logger.getLogger(TemplateResourceLocator.class);
 
-    /** Foldername for additional velocity body templates. The folder should be a subfolder in the IDEA/<i>plugins</i> folder. */
+    /**
+     * Foldername for additional velocity body templates. The folder should be a subfolder in the IDEA/<i>plugins</i> folder.
+     */
     public static final String FOLDER_NAME = "genprop-plugin";
 
-    /** Filename for autosaving active template. */
+    /**
+     * Filename for autosaving active template.
+     */
     public static final String AUTOSAVE_ACTIVE_TEMPLATE_FILE_NAME = "__autosave_active";
 
     private static final String DEFAULT_CONCAT = "/org/intellij/idea/plugin/genprop/template/DefaultConcat.vm";
@@ -56,7 +60,7 @@ public class TemplateResourceLocator {
 
     /**
      * Get's the default template name if none exists. Likely when this plugin has been installed for the first time.
-     */ 
+     */
     public static String getDefaultTemplateName() {
         return "User template";
     }
@@ -93,7 +97,7 @@ public class TemplateResourceLocator {
 
         // check for sub folder exists
         File dir = new File(path);
-        if (! dir.exists()) {
+        if (!dir.exists()) {
             return null;
         }
 
@@ -102,9 +106,9 @@ public class TemplateResourceLocator {
         File[] files = dir.listFiles();
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
-            
+
             // add file if it is not the autosaved template
-            if (! file.getName().startsWith(AUTOSAVE_ACTIVE_TEMPLATE_FILE_NAME)) {
+            if (!file.getName().startsWith(AUTOSAVE_ACTIVE_TEMPLATE_FILE_NAME)) {
                 String body = null;
                 try {
                     body = FileUtil.readFile(file);
@@ -121,7 +125,8 @@ public class TemplateResourceLocator {
 
     /**
      * Get all the templates (defaults and additional)
-     * @return  all the templates.
+     *
+     * @return all the templates.
      */
     public static TemplateResource[] getAllTemplates() {
         List resources = new ArrayList();
@@ -138,12 +143,13 @@ public class TemplateResourceLocator {
             resources.add(tr);
         }
 
-       return (TemplateResource[]) resources.toArray(new TemplateResource[resources.size()]);
+        return (TemplateResource[]) resources.toArray(new TemplateResource[resources.size()]);
     }
 
     /**
      * Get's the template folder where additional templates are stored.
-     * @return  the absolute foldername.
+     *
+     * @return the absolute foldername.
      */
     public static String getTemplateFolder() {
         return PathManager.getPluginsPath() + File.separatorChar + FOLDER_NAME;
@@ -157,9 +163,9 @@ public class TemplateResourceLocator {
 
         // check for template folder exists
         File dir = new File(path);
-        if (! dir.exists()) {
+        if (!dir.exists()) {
             log.info("Creating template folder: " + path);
-            if (! dir.mkdirs()) {
+            if (!dir.mkdirs()) {
                 log.fatal("Error creating template folder: " + path);
                 throw new RuntimeException("Error creating template folder: " + path);
             }
@@ -170,8 +176,9 @@ public class TemplateResourceLocator {
 
     /**
      * Auto saves the active template in the to-string plugin folder (creates this folder if missing)
-     * @param content   the content of the template
-     * @throws TemplateResourceException  is thrown if error autosaving template.
+     *
+     * @param content the content of the template
+     * @throws TemplateResourceException is thrown if error autosaving template.
      */
     public static void autosaveActiveTemplate(String content) throws TemplateResourceException {
 
@@ -180,7 +187,7 @@ public class TemplateResourceLocator {
             return;
 
         // create template folder if missing
-        if (! templateFolderExists)
+        if (!templateFolderExists)
             createTemplateFolderIfMissing();
 
         try {

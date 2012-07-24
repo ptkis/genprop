@@ -10,8 +10,8 @@ import java.util.regex.PatternSyntaxException;
 /**
  * This is a method element containing information about the method.
  *
- * @see ElementFactory
  * @author Claus Ibsen
+ * @see ElementFactory
  * @since 2.15
  */
 public class MethodElement extends AbstractElement implements Serializable, Element, Filterable {
@@ -80,7 +80,8 @@ public class MethodElement extends AbstractElement implements Serializable, Elem
      *
      * @param regexp regular expression.
      * @return true if the methodname matches the regular expression.
-     * @throws java.util.regex.PatternSyntaxException   is throw if there is an error performing the matching.
+     * @throws java.util.regex.PatternSyntaxException
+     *                                  is throw if there is an error performing the matching.
      * @throws IllegalArgumentException is throw if the given input is invalid (an empty String).
      */
     public boolean matchName(String regexp) throws PatternSyntaxException, IllegalArgumentException {

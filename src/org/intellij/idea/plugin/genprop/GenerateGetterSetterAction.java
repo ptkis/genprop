@@ -16,29 +16,29 @@ import org.intellij.idea.plugin.genprop.psi.PsiAdapter;
  * @author Claus Ibsen
  */
 public class GenerateGetterSetterAction
-		extends EditorAction {
-	/**
-	 * Constructor.
-	 */
-	public GenerateGetterSetterAction() {
-		super(new GenerateGetterSetterActionHandler()); // register our action handler
-	}
+        extends EditorAction {
+    /**
+     * Constructor.
+     */
+    public GenerateGetterSetterAction() {
+        super(new GenerateGetterSetterActionHandler()); // register our action handler
+    }
 
-	/**
-	 * Updates the presentation of this action. Will disable this action for non-java files.
-	 *
-	 * @param editor IDEA editor.
-	 * @param presentation Presentation.
-	 * @param dataContext data context.
-	 */
-	@Override
-	public void update(Editor editor, Presentation presentation, DataContext dataContext) {
-		Project project = editor.getProject();
-		PsiAdapter psi = GeneratePropertyNameContext.getPsi();
-		PsiManager manager = psi.getPsiManager(project);
-		PsiJavaFile javaFile = psi.getSelectedJavaFile(project, manager);
-		presentation.setEnabled(javaFile != null && psi.getCurrentClass(javaFile, editor) != null);
-	}
+    /**
+     * Updates the presentation of this action. Will disable this action for non-java files.
+     *
+     * @param editor       IDEA editor.
+     * @param presentation Presentation.
+     * @param dataContext  data context.
+     */
+    @Override
+    public void update(Editor editor, Presentation presentation, DataContext dataContext) {
+        Project project = editor.getProject();
+        PsiAdapter psi = GeneratePropertyNameContext.getPsi();
+        PsiManager manager = psi.getPsiManager(project);
+        PsiJavaFile javaFile = psi.getSelectedJavaFile(project, manager);
+        presentation.setEnabled(javaFile != null && psi.getCurrentClass(javaFile, editor) != null);
+    }
 
 
 }

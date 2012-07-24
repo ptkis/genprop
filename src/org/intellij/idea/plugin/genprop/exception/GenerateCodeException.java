@@ -21,8 +21,8 @@ public class GenerateCodeException extends PluginException {
     /**
      * Error generating the java code.
      *
-     * @param msg    message description.
-     * @param cause  the caused exception.
+     * @param msg   message description.
+     * @param cause the caused exception.
      */
     public GenerateCodeException(String msg, Throwable cause) {
         super(msg, cause);

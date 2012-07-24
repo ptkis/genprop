@@ -122,28 +122,28 @@ public interface Element {
     /**
      * Is the element a java.util.Calendar type (also sublcass such as GregorianCalendar).
      *
-     * @return   true if the element is a java.util.Calendar type.
+     * @return true if the element is a java.util.Calendar type.
      */
     boolean isCalendar();
 
     /**
      * Is the element a java.lang.Boolean type or a boolean primitive?
      *
-     * @return   true if the element is either a java.lang.Boolean or a boolean primitive
+     * @return true if the element is either a java.lang.Boolean or a boolean primitive
      */
     boolean isBoolean();
 
     /**
      * Get's the elements type classname (etc. Object, String, List)
      *
-     * @return  the elements type classname.
+     * @return the elements type classname.
      */
     String getTypeName();
 
     /**
      * Get's the elements type qualified classname (etc. java.lang.Object, java.lang.String, java.util.List)
      *
-     * @return  the elements type qualified classname.
+     * @return the elements type qualified classname.
      */
     String getTypeQualifiedName();
 

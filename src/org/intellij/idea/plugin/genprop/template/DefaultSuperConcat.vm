@@ -1,28 +1,28 @@
 #if ( $fields.size() > 0 )
-#set ( $i = 0 )
-#if ($class.hasSuper)
+    #set ( $i = 0 )
+    #if ($class.hasSuper)
     return super.toString() + " ::: $classname{" +
-#else
+    #else
     return "$classname{" +
-#end
-#foreach( $field in $fields )
-#if ( $i == 0 )
-    "##
-#else
-    ", ##
-#end
-#if ( $field.objectArray )
-$field.name=" + ($field.name == null ? null : Arrays.asList($field.name)) +
-#elseif ( $field.string )
-$field.name='" + $field.name + "'" +
-#else
-$field.name=" + $field.name +
-#end
-#set ( $i = $i + 1 )
-#end
-    "}";
+    #end
+    #foreach( $field in $fields )
+        #if ( $i == 0 )
+        "##
+        #else
+        ", ##
+        #end
+        #if ( $field.objectArray )
+            $field.name=" + ($field.name == null ? null : Arrays.asList($field.name)) +
+        #elseif ( $field.string )
+            $field.name='" + $field.name + "'" +
+        #else
+            $field.name=" + $field.name +
+        #end
+        #set ( $i = $i + 1 )
+    #end
+"}";
 #elseif ($class.hasSuper)
-    return super.toString() + " :: $classname{}";
+return super.toString() + " :: $classname{}";
 #else
-    return "$classname{}";
+return "$classname{}";
 #end

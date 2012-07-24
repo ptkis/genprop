@@ -11,7 +11,9 @@ public abstract class DummyModelTestBean {
 
         private String title;
 
-        public boolean isMyMethod() { return true; }
+        public boolean isMyMethod() {
+            return true;
+        }
 
         public String toString() {
             return "MyInnerClass{" +
@@ -43,7 +45,9 @@ public abstract class DummyModelTestBean {
     public void nonGetterMethod() {
     }
 
-    public boolean isMyMethod() { return true; }
+    public boolean isMyMethod() {
+        return true;
+    }
 
     public String toString() {
         return "DummyModelTestBean{" +

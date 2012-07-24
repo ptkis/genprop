@@ -12,37 +12,37 @@
 // -- Claus Ibsen
 //
 #foreach ($field in $fields)
-  #if ($field.date || $field.calendar)
-    #set ($useDateFormat = true)
-    #set ($autoImportPackages = "java.text.SimpleDateFormat")
-  #end
+    #if ($field.date || $field.calendar)
+        #set ($useDateFormat = true)
+        #set ($autoImportPackages = "java.text.SimpleDateFormat")
+    #end
 #end
 #if ($useDateFormat)
-  final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 #end
 #if ( $fields.size() > 0 )
-#set ( $i = 0 )
-    return "$classname{" +
-#foreach( $field in $fields )
-#if ( $i == 0 )
-    "##
+    #set ( $i = 0 )
+return "$classname{" +
+    #foreach( $field in $fields )
+        #if ( $i == 0 )
+        "##
+        #else
+        ", ##
+        #end
+        #if ( $field.objectArray )
+            $field.name=" + ($field.name == null ? null : Arrays.asList($field.name)) +
+        #elseif ( $field.string )
+            $field.name='" + $field.name + "'" +
+        #elseif ( $field.calendar )
+            $field.name=" + ($field.name == null ? null : sdf.format($field.name .getTime())) +
+        #elseif ( $field.date )
+            $field.name=" + ($field.name == null ? null : sdf.format($field.name)) +
+        #else
+            $field.name=" + $field.name +
+        #end
+        #set ( $i = $i + 1 )
+    #end
+"}";
 #else
-    ", ##
-#end
-#if ( $field.objectArray )
-$field.name=" + ($field.name == null ? null : Arrays.asList($field.name)) +
-#elseif ( $field.string )
-$field.name='" + $field.name + "'" +
-#elseif ( $field.calendar )
-$field.name=" + ($field.name == null ? null : sdf.format($field.name .getTime())) +
-#elseif ( $field.date )
-$field.name=" + ($field.name == null ? null : sdf.format($field.name)) +
-#else
-$field.name=" + $field.name +
-#end
-#set ( $i = $i + 1 )
-#end
-    "}";
-#else
-    return "$classname{}";
+return "$classname{}";
 #end

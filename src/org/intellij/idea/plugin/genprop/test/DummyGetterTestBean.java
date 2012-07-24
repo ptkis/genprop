@@ -5,7 +5,9 @@ package org.intellij.idea.plugin.genprop.test;
  */
 public class DummyGetterTestBean {
 
-    public int getX() { return 0; }
+    public int getX() {
+        return 0;
+    }
 
     /**
      * Insert your javadoc comments here - okay

@@ -12,8 +12,8 @@ public class TemplateResourceException extends PluginException {
     /**
      * Create template exception (error saving template, loading template etc.)
      *
-     * @param msg    message description.
-     * @param cause  the caused exception.
+     * @param msg   message description.
+     * @param cause the caused exception.
      */
     public TemplateResourceException(String msg, Throwable cause) {
         super(msg, cause);
