@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AntConfiguration">
-    <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/build.xml">
-      <additionalClassPath />
-      <antReference projectDefault="true" />
-      <customJdkName value="" />
-      <maximumHeapSize value="128" />
       <maximumStackSize value="32" />
-      <properties />
     </buildFile>
   </component>
   <component name="Archetypes.Configuration">
@@ -193,6 +187,7 @@
         </inspection_tool>
         <inspection_tool class="ConstantStringIntern" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="ConstructorCount" enabled="false" level="WARNING" enabled_by_default="false">
+          <option name="ignoreDeprecatedConstructors" value="false" />
           <option name="m_limit" value="7" />
         </inspection_tool>
         <inspection_tool class="ControlFlowStatementWithoutBraces" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -359,6 +354,7 @@
         <inspection_tool class="MarkerInterface" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="MethodCanBeVariableArityMethod" enabled="true" level="WARNING" enabled_by_default="true">
           <option name="ignoreByteAndShortArrayParameters" value="false" />
+          <option name="ignoreOverridingMethods" value="false" />
         </inspection_tool>
         <inspection_tool class="MethodMayBeSynchronized" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="MethodNameSameAsParentName" enabled="true" level="WARNING" enabled_by_default="true" />
