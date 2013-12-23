@@ -6,7 +6,7 @@
 	</description>
 	<version>0.11</version>
 	<vendor email="thomas@katalisindonesia.com">Thomas Edwin Santosa</vendor>
-	<idea-version since-build="120.00" until-build="140.999"/>
+	<idea-version since-build="120.00" until-build="140.99999"/>
 	<!-- 1162 to be avail for both IDEA 4.0x and IDEA4.5x -->
 
 	<change-notes>
