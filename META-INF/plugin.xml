@@ -4,13 +4,13 @@
 	<description>Adds a new menu Generate Properties in the generate menu (alt + ins) to generate getter, setter and
 		property name constants of fields.
 	</description>
-	<version>0.11</version>
+	<version>0.12</version>
 	<vendor email="thomas@katalisindonesia.com">Thomas Edwin Santosa</vendor>
-	<idea-version since-build="120.00" until-build="140.99999"/>
+	<idea-version since-build="120.00" until-build="150.99999"/>
 	<!-- 1162 to be avail for both IDEA 4.0x and IDEA4.5x -->
 
 	<change-notes>
-		Added compatibility for Idea 13
+		Added compatibility for Idea 15
 	</change-notes>
 
 	<application-components>
