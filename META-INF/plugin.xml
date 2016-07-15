@@ -2,15 +2,14 @@
 <idea-plugin>
 	<name>GeneratePropertyNameConstants</name>
 	<description>Adds a new menu Generate Properties in the generate menu (alt + ins) to generate getter, setter and
-		property name constants of fields.
+		property name constants of fields. See https://github.com/thomedw/genprop
 	</description>
-	<version>0.12</version>
+	<version>0.14</version>
 	<vendor email="thomas@katalisindonesia.com">Thomas Edwin Santosa</vendor>
-	<idea-version since-build="120.00" until-build="150.99999"/>
-	<!-- 1162 to be avail for both IDEA 4.0x and IDEA4.5x -->
+	<idea-version since-build="150.00" until-build="170.*"/>
 
 	<change-notes>
-		Added compatibility for Idea 15
+		Added compatibility for Idea 2016.2
 	</change-notes>
 
 	<application-components>
@@ -28,7 +27,6 @@
 				text="Generate _properties" description="Generate properties"/>
 		<group id="Actions.ActionsPlugin.GeneratePropertyGroup" text="Generate _properties"
 			   description="Generate property name constants">
-			<reference ref="Actions.ActionsPlugin.GenerateProperties"/>
 			<add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Generate"/>
 			<add-to-group group-id="CodeMenu" anchor="after" relative-to-action="Generate"/>
 		</group>
@@ -37,7 +35,6 @@
 				text="Generate getter setter beans" description="Generate getter setter with property change support"/>
 		<group id="Actions.ActionsPlugin.GenerateGetterSetterBeansGroup" text="Generate getter setter _beans"
 			   description="Generate property name constants">
-			<reference ref="Actions.ActionsPlugin.GenerateGetterSetterBeans"/>
 			<add-to-group group-id="EditorPopupMenu" anchor="after" relative-to-action="Generate"/>
 			<add-to-group group-id="CodeMenu" anchor="after" relative-to-action="Generate"/>
 		</group>
