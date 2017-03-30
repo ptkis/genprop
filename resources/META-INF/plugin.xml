@@ -6,10 +6,10 @@
 	</description>
 	<version>0.14</version>
 	<vendor email="thomas@katalisindonesia.com">Thomas Edwin Santosa</vendor>
-	<idea-version since-build="150.00" until-build="170.*"/>
+	<idea-version since-build="150.00"/>
 
 	<change-notes>
-		Added compatibility for Idea 2016.2
+		Added compatibility for Idea 2017.1
 	</change-notes>
 
 	<application-components>
